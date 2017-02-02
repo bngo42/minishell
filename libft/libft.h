@@ -6,13 +6,14 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 11:28:10 by bngo              #+#    #+#             */
-/*   Updated: 2015/12/23 12:05:38 by bngo             ###   ########.fr       */
+/*   Updated: 2017/02/02 14:38:04 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LIBFT_H
 # define FT_LIBFT_H
 # include <stdlib.h>
+# include "../include/get_next_line.h"
 
 typedef	struct		s_list
 {
@@ -64,6 +65,7 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s2, char c);
+char				**ft_split(char *str);
 char				*ft_itoa(int n);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
