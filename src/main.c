@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/02/06 14:49:37 by bngo             ###   ########.fr       */
+/*   Updated: 2017/02/06 20:08:08 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,44 @@ int			get_func(char **str)
 	return (1);
 }
 
+int			check_arg(char *str)
+{
+	int i;
+	int j;
+	int state;
+	char *path;
+
+	i = ft_strlen(str);
+	j = 0;
+	state = 0;
+	while (i > 0 && str[i - 1] != '/')
+		i--;
+	if (i <= 0)
+		return (state);
+	else
+	{
+		path = ft_strsub(str, 0, i);
+		if (ft_strcmp(path, "/bin/") == 0)
+			state = 1;
+	}
+	if (path)
+		free(path);
+	return (state);
+}
+
 int			main(int argc, char **argv)
 {
-	(void)argc;
 	char	*line;
 	char	**arg;
 	char	*ex;
-	int		i;
 	pid_t	father;
 
-	i = 0;
 	while (1)
 	{
-		ft_putstr("[MINISHELL]");
+		ft_putstr("[MINISHELL] ");
 		father = fork();
 		if (father > 0)
-			wait(&i);
+			wait(&argc);
 		if (father == 0)
 		{
 			get_next_line(0, &line);
@@ -53,8 +75,7 @@ int			main(int argc, char **argv)
 				{
 					if (get_func(arg))
 					{
-
-						ex = ft_strjoin("/bin/", arg[0]);
+						ex = (check_arg(arg[0])) ? arg[0] : ft_strjoin("/bin/", arg[0]);
 						if (execve(ex, arg, NULL) == -1)
 						{
 							ft_putstr_fd("command not found: ", 2);

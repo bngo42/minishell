@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/02/06 14:34:24 by bngo             ###   ########.fr       */
+/*   Updated: 2017/02/06 19:33:06 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,26 @@ int			echo_func(char **str)
 {
 	int i;
 	int j;
-	int simple;
-	int doublle;
+	int	quot[2];
 
 	i = 0;
-	simple = 0;
-	doublle = 0;
+	quot[0] = 0;
+	quot[1] = 0;
 	while (str[++i])
 	{
 		j = -1;
 		while (str[i][++j])
 		{
-			if (str[i][j] == '\'' && doublle == 0)
-				simple = (simple == 1) ? 0 : 1;
-			if (str[i][j] == '"' && simple == 0)
-				doublle = (doublle == 1) ? 0 : 1;
-			if ((str[i][j] == '\'' && doublle) || (str[i][j] == '"' && simple)
+			if (str[i][j] == '\'' && quot[1] == 0)
+				quot[0] = (quot[0] == 1) ? 0 : 1;
+			if (str[i][j] == '"' && quot[0] == 0)
+				quot[1] = (quot[1] == 1) ? 0 : 1;
+			if ((str[i][j] == '\'' && quot[1]) || (str[i][j] == '"' && quot[0])
 					|| (str[i][j] != '\'' && str[i][j] != '"'))
 			ft_putchar(str[i][j]);
 		}
-		ft_putchar(' ');
+		if (str[i + 1])
+			ft_putchar(' ');
 	}
 	ft_putchar('\n');
 	return (0);
