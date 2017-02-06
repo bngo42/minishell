@@ -6,52 +6,58 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 14:02:26 by bngo              #+#    #+#             */
-/*   Updated: 2017/02/02 14:40:24 by bngo             ###   ########.fr       */
+/*   Updated: 2017/02/06 14:49:17 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <unistd.h>
 
-static int	count_words(char *s)
+static int	count_words(char *str)
 {
-	int words;
+	int	i;
+	int	count;
 
-	while (*s && (*s == ' ' || *s == '\t'))
-		++s;
-	words = (*s) ? 1 : 0;
-	while (*s)
+	i = 0;
+	count = 0;
+	while (str && str[i])
 	{
-		if ((*s == ' ' || *s == '\t') && s[1] && s[1] != ' ' && s[1] != '\t')
-			++words;
-		++s;
+		while (str[i] && (str[i] == ' ' || str[i] == '\t'))
+			i++;
+		if (str[i])
+		{
+			count++;
+			while (str[i] && str[i] != ' ' && str[i] != '\t')
+				i++;
+		}
 	}
-	return (words);
+	return (count);
 }
 
 char		**ft_split(char *str)
 {
-	char	**tab;
+	char	**split;
 	int		i;
 	int		j;
-	int		start;
 
+	i = 0;
 	j = 0;
-	if (!(tab = (char**)malloc(sizeof(char*) * count_words(str))))
-		return (NULL);
-	while (str[start])
+	if (!(split = (char **)malloc(sizeof(char *) * (count_words(str) + 1))))
+		return (split);
+	while (str && str[i])
 	{
-		i = 0;
-		while (str[start] == ' ' || str[start] == '\t')
-			start++;
-		while (str[start + i] != ' ' && str[start + i] != '\t')
-			i++;
-		if (i > 0)
+		while (*str && (*str == ' ' || *str == '\t'))
+			str++;
+		if (*str)
 		{
-			tab[j] = ft_strsub(str, start, i);
+			while (str[i] && str[i] != ' ' && str[i] != '\t')
+				i++;
+			split[j] = ft_strsub(str, 0, i);
 			j++;
+			str = str + i;
+			i = 0;
 		}
-		start += i;
 	}
-	return (tab);
+	split[j] = NULL;
+	return (split);
 }
