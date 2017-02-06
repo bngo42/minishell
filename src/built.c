@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   built.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/02 12:30:19 by bngo              #+#    #+#             */
-/*   Updated: 2017/02/06 12:52:07 by bngo             ###   ########.fr       */
+/*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
+/*   Updated: 2017/02/06 12:58:30 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "../libft/libft.h"
-# include <unistd.h>
-# include <sys/wait.h>
-# include <stdio.h>
+#include "../include/minishell.h"
 
-int			echo_func(char **str);
-int			cd_func(char **str);
-int			env_func(char **str);
-int			setenv_func(char **str);
-int			unsetenv_func(char **str);
+int			echo_func(char **str)
+{
+	int i;
+	int j;
 
-#endif
+	i = 1;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			if (str[i][j] != '\'' && str[i][j] != '"')
+				ft_putchar(str[i][j]);
+			j++;
+		}
+		ft_putchar(' ');
+		i++;
+	}
+	ft_putchar('\n');
+	return (0);
+}
