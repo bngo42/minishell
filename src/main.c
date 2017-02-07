@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/02/06 20:08:08 by bngo             ###   ########.fr       */
+/*   Updated: 2017/02/07 16:31:07 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int			check_arg(char *str)
 	return (state);
 }
 
-int			main(int argc, char **argv)
+int			main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	char	**arg;
@@ -71,17 +71,10 @@ int			main(int argc, char **argv)
 			if (line && line[0] != '\0')
 			{
 				arg = ft_split(line);
-				if (arg[0])
+				if (arg[0] && get_func(arg) && execve(arg[0], arg, envp) == -1)
 				{
-					if (get_func(arg))
-					{
-						ex = (check_arg(arg[0])) ? arg[0] : ft_strjoin("/bin/", arg[0]);
-						if (execve(ex, arg, NULL) == -1)
-						{
-							ft_putstr_fd("command not found: ", 2);
-							ft_putendl_fd(arg[0], 2);
-						}
-					}
+					ft_putstr_fd("command not found: ", 2);
+					ft_putendl_fd(arg[0], 2);
 				}
 			}
 		}
