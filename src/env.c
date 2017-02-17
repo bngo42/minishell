@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 19:46:16 by bngo              #+#    #+#             */
-/*   Updated: 2017/02/07 20:07:22 by bngo             ###   ########.fr       */
+/*   Updated: 2017/02/17 12:34:41 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@ static t_env		*init_env_link(char *str)
 	if (splitter)
 		free(splitter);
 	return (new);
+}
+
+t_env		*init_env(void)
+{
+	t_env *lst;
+	t_env *new;
+
+	lst = init_env_link("PATH=");
+	lst->next = new;
+	new = init_env_link("SHLVL=1");
+	return (lst);
 }
 
 t_env		*convert_tab(char **str)

@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/02/08 12:17:55 by bngo             ###   ########.fr       */
+/*   Updated: 2017/02/17 12:31:55 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,8 @@ int			main(int argc, char **argv, char **envp)
 	t_env  *toto;
 	
 	toto = convert_tab(envp);
-	while (toto->next)
-	{
-		printf("[NAME: %s]\n[VALUE: %s]\n\n", toto->name, toto->value);
-		toto = toto->next;
-	}
+	if (toto == NULL)
+		init_env_link();
 	while (1)
 	{
 		ft_putstr("[MINISHELL] ");
