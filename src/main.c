@@ -56,14 +56,19 @@ int			main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	char	**arg;
-	char	*ex;
 	pid_t	father;
+	t_env   *env;
 	
-	t_env  *toto;
-	
-	toto = convert_tab(envp);
-	if (toto == NULL)
-		init_env_link();
+	env = convert_tab(envp);
+	if (env == NULL)
+		env = init_env();
+    while (env->next)
+    {
+        ft_putstr(env->name);
+        ft_putchar('=');
+        ft_putendl(env->value);
+        env = env->next;
+    }
 	while (1)
 	{
 		ft_putstr("[MINISHELL] ");

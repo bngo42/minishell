@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:30:19 by bngo              #+#    #+#             */
-/*   Updated: 2017/02/08 12:18:15 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/06 11:52:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ int			setenv_func(char **str);
 int			unsetenv_func(char **str);
 
 t_env		*convert_tab(char **str);
+t_env		*init_env();
 #endif
