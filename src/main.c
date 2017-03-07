@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/07 19:44:19 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/07 20:41:20 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 
 int			get_func(char **str)
 {
-	const t_built	fn[5] = {{"echo", &echo_func}};
+	const t_built	fn[6] = {	{"echo", &echo_func},
+								{"cd", &cd_func},
+								{"setenv", &setenv_func},
+								{"unsetenv", &unsetenv_func},
+								{"env", &env_func},
+								{"exit", &exit_func}
+	};
 	int				i;
 
 	i = 0;
@@ -36,6 +42,7 @@ void		read_cmd(char **arg, char **envp)
 	if (line && line[0] != '\0')
 	{
 		arg = ft_split(line);
+		ft_putnbr(get_func(arg));
 		if (arg[0] && get_func(arg) && check_cmd(arg[0], arg, envp) == -1)
 		{
 			ft_putstr_fd("command not found: ", 2);

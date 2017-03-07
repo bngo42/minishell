@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/02/06 19:33:06 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/07 20:40:49 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,35 @@ int			echo_func(char **str)
 			ft_putchar(' ');
 	}
 	ft_putchar('\n');
+	return (0);
+}
+
+int			cd_func(char **str)
+{
+	ft_putendl("BUILTIN CD");
+	return (0);
+}
+
+int			setenv_func(char **str)
+{
+	ft_putendl("BUILTIN SETENV");
+	return (0);
+}
+
+int			unsetenv_func(char **str)
+{
+	ft_putendl("BUILTIN UNSETENV");
+	return (0);
+}
+
+int			env_func(char **str)
+{
+	ft_putendl("BUILTIN ENV");
+	return (0);
+}
+
+int			exit_func(char **str)
+{
+	ft_putendl("BUILTIN EXIT");
 	return (0);
 }
