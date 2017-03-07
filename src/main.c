@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/07 14:28:50 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/07 18:49:32 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,16 @@ int			main(int argc, char **argv, char **envp)
 	char	**env;
 	t_env	*test;
 	
-	envp = NULL;
-	if (!envp[0])
-	{
+	if (!envp)
 		env = init_env();
-		test = convert_env(env);
+	test = convert_env((!envp) ? env : envp);
+	while (test->next)
+	{
+		ft_putstr(test->name);
+		ft_putchar('=');
+		ft_putendl(test->value);
+		test = test->next;
 	}
-    while (test->next)
-    {
-        ft_putstr(test->name);
-        ft_putchar('=');
-        ft_putendl(test->value);
-        test = test->next;
-    }
 	while (1)
 	{
 		ft_putstr("[MINISHELL] ");

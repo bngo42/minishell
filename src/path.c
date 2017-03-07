@@ -6,15 +6,9 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 13:41:56 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/07 13:46:07 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/07 18:39:55 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-
-int		check_path(t_env *env, char *str)
-{
-	
-	return (0);
-}
