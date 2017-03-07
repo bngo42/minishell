@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/02/17 12:31:55 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/07 14:28:50 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,21 @@ int			main(int argc, char **argv, char **envp)
 	char	*line;
 	char	**arg;
 	pid_t	father;
-	t_env   *env;
+	char	**env;
+	t_env	*test;
 	
-	env = convert_tab(envp);
-	if (env == NULL)
+	envp = NULL;
+	if (!envp[0])
+	{
 		env = init_env();
-    while (env->next)
+		test = convert_env(env);
+	}
+    while (test->next)
     {
-        ft_putstr(env->name);
+        ft_putstr(test->name);
         ft_putchar('=');
-        ft_putendl(env->value);
-        env = env->next;
+        ft_putendl(test->value);
+        test = test->next;
     }
 	while (1)
 	{

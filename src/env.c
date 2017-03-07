@@ -6,30 +6,11 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 19:46:16 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/06 11:51:02 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/07 14:29:25 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-static t_env		*init_env_link(char *str)
-{
-	t_env	*new;
-	char	**splitter;
-
-	if (!(new = (t_env*)malloc(sizeof(t_env))))
-		return (NULL);
-	new->next = NULL;
-	splitter = ft_strsplit(str, '=');
-	if (splitter == NULL)
-		return (NULL);
-	new->name = splitter[0];
-	if (splitter[1])
-		new->value = splitter[1];
-	if (splitter)
-		free(splitter);
-	return (new);
-}
 
 void        add_env(t_env **lst, t_env *new)
 {
@@ -44,49 +25,72 @@ void        add_env(t_env **lst, t_env *new)
     *lst = tmp;
 }
 
-t_env		*init_env()
+char		**init_env(void)
 {
-    t_env *lst;
-	t_env *new;
-    t_env *tmp;
+	char	**env;
 
-	lst = init_env_link("HOME=/Users/bngo");
-	new = init_env_link("LOGNAME=bngo");
-    add_env(&lst, new);
-	new = init_env_link("SHLVL=1");
-    add_env(&lst, new);
-    new = init_env_link("PWD=/Users/bngo");
-    add_env(&lst, new);
-    new = init_env_link("OLDPWD=/Users/bngo");
-    add_env(&lst, new);
+	if (!(env = (char**)malloc(sizeof(char*) * 5)))
+		return (NULL);
+	env[0] = ft_strdup("PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/munki");
+	env[1] = ft_strdup("HOME=/Users/bngo");
+	env[2] = ft_strdup("LOGNAME=bngo");
+	env[3] = ft_strdup("SHLVL=1");
+	env[4] = ft_strdup("PWD=/Users/bngo");
+	return (env);
+}
+
+t_env		*init_link(char *name, char *value)
+{
+	t_env *new;
+
+	if (!(new = (t_env*)malloc(sizeof(t_env))))
+		return (NULL);
+	new->name = name;
+	new->value = value;
+	new->next = NULL;
+	return (new);
+}
+
+void		push_link(t_env *lst, t_env *new)
+{
+	t_env *tmp;
+
+	tmp = lst;
+	if (!lst)
+	{
+		lst = new;
+		return ;
+	}
+	while (lst->next)
+		lst = lst->next;
+	lst->next = new;
+}
+
+t_env		*convert_env(char **env)
+{
+	int		i;
+	char	**tmp;
+	t_env	*lst;
+	t_env	*new;
+	
+	if ((tmp = ft_strsplit(env[i], '=')))
+		lst = init_link(tmp[0], tmp[1]);
+	i = 1;
+	while (env[i])
+	{
+		if (tmp)
+			free(tmp);
+		if ((tmp = ft_strsplit(env[i], '=')))
+		{
+			new = init_link(tmp[0], tmp[1]);
+			push_link(lst, new);
+		}
+		i++;
+	}
 	return (lst);
 }
 
-t_env		*convert_tab(char **str)
-{
-	int		i;
-	char	**splitter;
-	t_env	*new_env;
-	t_env	*list_env;
-	t_env	*tmp;
 
-	i = 0;
-    list_env = NULL;
-    if (str)
-    {
-	   if (!(list_env = init_env_link(str[i])))
-	       return (NULL);
-	   i++;
-	   tmp = list_env;
-	   while (str[i])
-	   {
-	   	   if (!(new_env = init_env_link(str[i])))
-	   	   	   return (NULL);
-	   	   list_env->next = new_env;
-	   	   list_env = list_env->next;
-	   	   i++;
-	   }
-	   list_env = tmp;
-    }
-	return (list_env);
-}
+
+
+
