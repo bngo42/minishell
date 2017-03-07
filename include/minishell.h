@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:30:19 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/07 14:29:43 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/07 19:36:54 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,6 @@ int			unsetenv_func(char **str);
 
 char		**init_env(void);
 t_env		*convert_env(char **env);
+
+int			check_cmd(char *path, char **arg, char **env);
 #endif

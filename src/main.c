@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/07 18:49:32 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/07 19:44:19 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,49 +27,34 @@ int			get_func(char **str)
 	return (1);
 }
 
-int			check_arg(char *str)
+void		read_cmd(char **arg, char **envp)
 {
-	int i;
-	int j;
-	int state;
-	char *path;
+	char *line;
 
-	i = ft_strlen(str);
-	j = 0;
-	state = 0;
-	while (i > 0 && str[i - 1] != '/')
-		i--;
-	if (i <= 0)
-		return (state);
-	else
+	line = NULL;
+	get_next_line(0, &line);
+	if (line && line[0] != '\0')
 	{
-		path = ft_strsub(str, 0, i);
-		if (ft_strcmp(path, "/bin/") == 0)
-			state = 1;
+		arg = ft_split(line);
+		if (arg[0] && get_func(arg) && check_cmd(arg[0], arg, envp) == -1)
+		{
+			ft_putstr_fd("command not found: ", 2);
+			ft_putendl_fd(arg[0], 2);
+		}
 	}
-	if (path)
-		free(path);
-	return (state);
 }
 
 int			main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	char	**arg;
-	pid_t	father;
 	char	**env;
-	t_env	*test;
-	
+	pid_t	father;
+	t_env	*listenv;
+
 	if (!envp)
 		env = init_env();
-	test = convert_env((!envp) ? env : envp);
-	while (test->next)
-	{
-		ft_putstr(test->name);
-		ft_putchar('=');
-		ft_putendl(test->value);
-		test = test->next;
-	}
+	listenv = convert_env((!envp) ? env : envp);
 	while (1)
 	{
 		ft_putstr("[MINISHELL] ");
@@ -77,18 +62,7 @@ int			main(int argc, char **argv, char **envp)
 		if (father > 0)
 			wait(&argc);
 		if (father == 0)
-		{
-			get_next_line(0, &line);
-			if (line && line[0] != '\0')
-			{
-				arg = ft_split(line);
-				if (arg[0] && get_func(arg) && execve(arg[0], arg, envp) == -1)
-				{
-					ft_putstr_fd("command not found: ", 2);
-					ft_putendl_fd(arg[0], 2);
-				}
-			}
-		}
+			read_cmd(arg, envp);
 	}
 	return (0);
 }
