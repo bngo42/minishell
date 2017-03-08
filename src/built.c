@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/08 18:31:22 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/08 19:47:38 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,20 @@ int			unsetenv_func(char **str, t_env *env)
 
 int			env_func(char **str, t_env *env)
 {
-	ft_putendl("BUILTIN ENV");
+	int i;
+	int j;
+
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			ft_putchar(str[i][j]);
+			j++;
+		}
+		i++;
+	}
 	return (0);
 }
 
