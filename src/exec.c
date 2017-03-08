@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 19:30:48 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/08 16:07:21 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/08 19:35:01 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,17 @@ char		**get_cmd_path(char **env)
 int			exe_cmd(char *path, char **arg, char **env)
 {
 	pid_t	process;
-	int		i;
 
 	process = fork();
 	if (process == 0)
 	{
-		if (access(path, F_OK) == 0 && execve(path, arg, env))
+		if (execve(path, arg, env))
 			return (1);
 		else
 			return (0);
 	}
 	else
-		wait (&i);
+		wait (NULL);
 	return (0);
 }
 
@@ -97,13 +96,15 @@ int			check_cmd(char *cmd, char **arg, char **env)
 		{
 			newpath = ft_strjoin(path[i], "/");
 			newcmd = ft_strjoin(newpath, cmd);
-			if (exe_cmd(newcmd, arg, env))
-				ret = 0;
+			if (!access(newcmd, F_OK))
+				ret = exe_cmd(newcmd, arg, env);
 			free(newcmd);
 			free(newpath);
 		}
 	}
-	else if (exe_cmd(cmd, arg, env))
-		ret = 0;
+	else if (!access(cmd, F_OK))
+	{
+		ret = exe_cmd(cmd, arg, env);
+	}
 	return (ret);
 }

@@ -6,7 +6,7 @@
 #    By: bngo <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/05 11:40:59 by bngo              #+#    #+#              #
-#    Updated: 2017/03/07 19:37:15 by bngo             ###   ########.fr        #
+#    Updated: 2017/03/08 18:12:28 by bngo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ INC = $(addprefix -I , $(HPATH))
 CFILES = main.c \
 		 built.c \
 		 env.c \
-		 exec.c
+		 exec.c \
+		 tools.c
 
 OFILES = $(CFILES:.c=.o)
 HFILES = include/minishell.h libft/libft.h

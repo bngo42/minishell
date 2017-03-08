@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 19:46:16 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/07 18:45:37 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/08 18:20:31 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,15 @@ char		**init_env(void)
 {
 	char	**env;
 
-	if (!(env = (char**)malloc(sizeof(char*) * 6)))
+	if (!(env = (char**)malloc(sizeof(char*) * 7)))
 		return (NULL);
 	env[0] = ft_strdup("PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/munki");
 	env[1] = ft_strdup("HOME=/Users/bngo");
 	env[2] = ft_strdup("LOGNAME=bngo");
 	env[3] = ft_strdup("SHLVL=1");
 	env[4] = ft_strdup("PWD=/Users/bngo");
-	env[5] = 0;
+	env[5] = ft_strdup("OLDPWD=");
+	env[6] = 0;
 	return (env);
 }
 
@@ -98,8 +99,3 @@ t_env		*convert_env(char **env)
 	}
 	return (lst);
 }
-
-
-
-
-

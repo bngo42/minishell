@@ -6,13 +6,13 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/08 16:59:24 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/08 18:31:22 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int			echo_func(char **str)
+int			echo_func(char **str, t_env *env)
 {
 	int i;
 	int j;
@@ -41,31 +41,31 @@ int			echo_func(char **str)
 	return (0);
 }
 
-int			cd_func(char **str)
+int			cd_func(char **str, t_env *env)
 {
 	ft_putendl("BUILTIN CD");
 	return (0);
 }
 
-int			setenv_func(char **str)
+int			setenv_func(char **str, t_env *env)
 {
 	ft_putendl("BUILTIN SETENV");
 	return (0);
 }
 
-int			unsetenv_func(char **str)
+int			unsetenv_func(char **str, t_env *env)
 {
 	ft_putendl("BUILTIN UNSETENV");
 	return (0);
 }
 
-int			env_func(char **str)
+int			env_func(char **str, t_env *env)
 {
 	ft_putendl("BUILTIN ENV");
 	return (0);
 }
 
-int			exit_func(char **str)
+int			exit_func(char **str, t_env *env)
 {
 	int i;
 	int e;
