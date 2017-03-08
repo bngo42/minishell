@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 19:30:48 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/08 16:03:42 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/08 16:07:21 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,8 @@ int			exe_cmd(char *path, char **arg, char **env)
 	process = fork();
 	if (process == 0)
 	{
-		if (access(path, F_OK) == 0)
-		{
-			if (execve(path, arg, env))
-				return (1);
-			else
-				return (0);
-		}
+		if (access(path, F_OK) == 0 && execve(path, arg, env))
+			return (1);
 		else
 			return (0);
 	}
