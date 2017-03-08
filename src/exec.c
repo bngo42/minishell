@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 19:30:48 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/07 20:28:19 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/08 16:03:42 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,31 +61,54 @@ char		**get_cmd_path(char **env)
 	return (path);
 }
 
+int			exe_cmd(char *path, char **arg, char **env)
+{
+	pid_t	process;
+	int		i;
+
+	process = fork();
+	if (process == 0)
+	{
+		if (access(path, F_OK) == 0)
+		{
+			if (execve(path, arg, env))
+				return (1);
+			else
+				return (0);
+		}
+		else
+			return (0);
+	}
+	else
+		wait (&i);
+	return (0);
+}
+
+
 int			check_cmd(char *cmd, char **arg, char **env)
 {
 	int		i;
 	char	**path;
 	char	*newcmd;
 	char	*newpath;
+	int		ret;
 
 	i = -1;
+	ret = 1;
 	if (!check_path(cmd))
 	{
 		path = get_cmd_path(env);
-		while (path[++i])
+		while (path[++i] && ret)
 		{
 			newpath = ft_strjoin(path[i], "/");
 			newcmd = ft_strjoin(newpath, cmd);
-			if (execve(newcmd, arg, env) != -1)
-				return (1);
-			if (newcmd)
-				free(newcmd);
-			if (newpath)
-				free(newpath);
+			if (exe_cmd(newcmd, arg, env))
+				ret = 0;
+			free(newcmd);
+			free(newpath);
 		}
-		return (-1);
 	}
-	else if (execve(cmd, arg, env) == -1)
-		return (-1);
-	return (-1);
+	else if (exe_cmd(cmd, arg, env))
+		ret = 0;
+	return (ret);
 }
