@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/08 19:47:38 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/08 19:57:01 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,22 @@ int			unsetenv_func(char **str, t_env *env)
 
 int			env_func(char **str, t_env *env)
 {
-	int i;
-	int j;
+	t_env *tmp;
 
-	i = 0;
-	while (str[i])
+	tmp = env;
+	if (str[1] && ft_strcmp(str[1], "-i") == 0)
+		ft_putchar('i');
+	else if (str[1] && ft_strcmp(str[1], "-v") == 0)
+		ft_putchar('i');
+	else
 	{
-		j = 0;
-		while (str[i][j])
+		while (tmp)
 		{
-			ft_putchar(str[i][j]);
-			j++;
+			ft_putstr(tmp->name);
+			ft_putchar('=');
+			ft_putendl(tmp->value);
+			tmp = tmp->next;
 		}
-		i++;
 	}
 	return (0);
 }

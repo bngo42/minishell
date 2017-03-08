@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/08 19:29:25 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/08 19:54:58 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,16 @@ int			get_func(char **str, char **envp, t_env *env)
 	return (0);
 }
 
-void		read_cmd(char **arg, char **envp)
+void		read_cmd(char **arg, char **envp, t_env *env)
 {
 	char *line;
 	int		ret;
-	t_env	*env;
 
 	line = NULL;
 	get_next_line(0, &line);
 	if (line && line[0] != '\0')
 	{
 		arg = ft_split(line);
-		env = convert_env(envp);
 		if (arg[0] && get_func(arg, envp, env))
 		{
 			ft_putstr_fd("command not found: ", 2);
@@ -67,7 +65,7 @@ int			main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		ft_putstr("[MINISHELL] ");
-		read_cmd(arg, envp);
+		read_cmd(arg, envp, listenv);
 	}
 	return (0);
 }
