@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/08 15:29:12 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/08 16:09:31 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			get_func(char **str, char **envp)
 	int				i;
 
 	i = -1;
-	while (++i < 5)
+	while (++i <= 5)
 	{
 		if (ft_strcmp(fn[i].name, str[0]) == 0)
 			return (fn[i].built(str));

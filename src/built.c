@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/07 20:40:49 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/08 16:59:24 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,20 @@ int			env_func(char **str)
 
 int			exit_func(char **str)
 {
-	ft_putendl("BUILTIN EXIT");
+	int i;
+	int e;
+
+	i = 0;
+	e = 0;
+	while (str[i])
+		i++;
+	if (i > 2)
+		ft_putendl("exit: too many arguments");
+	else
+	{
+		if (str[1])
+			e = atoi(str[1]);
+		exit( (e < 256) ? e : 0);
+	}
 	return (0);
 }
