@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/09 18:38:01 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/09 20:13:04 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,14 @@ int			cd_func(char **str, t_globenv *envi)
 	char *path;
 	char *tmp;
 	char *tmp2;
+	int		type;
 
 	path = NULL;
+	type = 0;
 	tmp2 = getlstvalue("PWD", envi);
-	if (str[1])
+	if (str[1] && ft_strcmp(str[1], "~") != 0)
 	{
+		type = 1;
 		if (ft_strcmp(str[1], "-") == 0)
 			path = getlstvalue("OLDPWD", envi);
 		else
@@ -61,9 +64,12 @@ int			cd_func(char **str, t_globenv *envi)
 	}
 	else
 		path = getlstvalue("HOME", envi);
-	update_vartab("OLDPWD", tmp2, envi);
-	update_vartab("PWD", path, envi);
-	chdir(path);
+	if (check_dir(path))
+	{
+		update_vartab("PWD", (type) ? path : tmp2, envi);
+		update_vartab("PWD", path, envi);
+		chdir(path);
+	}
 	return (0);
 }
 

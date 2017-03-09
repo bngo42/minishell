@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:30:19 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/09 17:32:21 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/09 19:58:07 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 # include "../libft/libft.h"
 # include <unistd.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <stdio.h>
+# include <dirent.h>
 
 typedef struct		s_env
 {
@@ -55,4 +57,6 @@ void				update_env(char **env, t_env*lst);
 char				*getlstvalue(char *name, t_globenv *env);
 char				*gettabvalue(char *name, t_globenv *env);
 int					update_vartab(char*name, char *value, t_globenv *envi);
+
+int					check_dir(char *path);
 #endif
