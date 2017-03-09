@@ -6,13 +6,13 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/08 19:57:01 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/09 18:38:01 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int			echo_func(char **str, t_env *env)
+int			echo_func(char **str, t_globenv *envi)
 {
 	int i;
 	int j;
@@ -41,29 +41,49 @@ int			echo_func(char **str, t_env *env)
 	return (0);
 }
 
-int			cd_func(char **str, t_env *env)
+int			cd_func(char **str, t_globenv *envi)
 {
-	ft_putendl("BUILTIN CD");
+	char *path;
+	char *tmp;
+	char *tmp2;
+
+	path = NULL;
+	tmp2 = getlstvalue("PWD", envi);
+	if (str[1])
+	{
+		if (ft_strcmp(str[1], "-") == 0)
+			path = getlstvalue("OLDPWD", envi);
+		else
+		{
+			tmp = ft_strjoin("/", str[1]);
+			path = ft_strjoin(tmp2, tmp);
+		}
+	}
+	else
+		path = getlstvalue("HOME", envi);
+	update_vartab("OLDPWD", tmp2, envi);
+	update_vartab("PWD", path, envi);
+	chdir(path);
 	return (0);
 }
 
-int			setenv_func(char **str, t_env *env)
+int			setenv_func(char **str, t_globenv *envi)
 {
 	ft_putendl("BUILTIN SETENV");
 	return (0);
 }
 
-int			unsetenv_func(char **str, t_env *env)
+int			unsetenv_func(char **str, t_globenv *envi)
 {
 	ft_putendl("BUILTIN UNSETENV");
 	return (0);
 }
 
-int			env_func(char **str, t_env *env)
+int			env_func(char **str, t_globenv *envi)
 {
 	t_env *tmp;
 
-	tmp = env;
+	tmp = envi->envlst;
 	if (str[1] && ft_strcmp(str[1], "-i") == 0)
 		ft_putchar('i');
 	else if (str[1] && ft_strcmp(str[1], "-v") == 0)
@@ -81,7 +101,7 @@ int			env_func(char **str, t_env *env)
 	return (0);
 }
 
-int			exit_func(char **str, t_env *env)
+int			exit_func(char **str, t_globenv *envi)
 {
 	int i;
 	int e;

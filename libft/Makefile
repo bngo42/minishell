@@ -6,7 +6,7 @@
 #    By: bngo <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/30 14:39:24 by bngo              #+#    #+#              #
-#    Updated: 2017/02/02 14:36:47 by bngo             ###   ########.fr        #
+#    Updated: 2017/03/09 18:13:25 by bngo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,8 @@ SRC_NAME = ft_atoi.c \
 		   ft_lstiter.c \
 		   ft_lstmap.c \
 		   ft_split.c \
+		   ft_cpytab.c \
+		   ft_puttab.c \
 		   get_next_line.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)

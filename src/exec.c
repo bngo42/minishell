@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 19:30:48 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/08 19:35:01 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/09 16:49:51 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			check_path(char *str)
 	return (state);
 }
 
-char		**get_cmd_path(char **env)
+char		**get_cmd_path(t_globenv *envi)
 {
 	char	**tmp;
 	char	**path;
@@ -46,10 +46,10 @@ char		**get_cmd_path(char **env)
 
 	path = NULL;
 	i = 0;
-	while (env[i])
+	while (envi->envtab[i])
 	{
 		tmp = NULL;
-		if ((tmp = ft_strsplit(env[i], '=')))
+		if ((tmp = ft_strsplit(envi->envtab[i], '=')))
 		{
 			if (tmp[0] && ft_strcmp(tmp[0], "PATH") == 0)
 				path = ft_strsplit(tmp[1], ':');
@@ -61,14 +61,14 @@ char		**get_cmd_path(char **env)
 	return (path);
 }
 
-int			exe_cmd(char *path, char **arg, char **env)
+int			exe_cmd(char *path, char **arg, t_globenv *envi)
 {
 	pid_t	process;
 
 	process = fork();
 	if (process == 0)
 	{
-		if (execve(path, arg, env))
+		if (execve(path, arg, envi->envtab))
 			return (1);
 		else
 			return (0);
@@ -79,7 +79,7 @@ int			exe_cmd(char *path, char **arg, char **env)
 }
 
 
-int			check_cmd(char *cmd, char **arg, char **env)
+int			check_cmd(char *cmd, char **arg, t_globenv *envi)
 {
 	int		i;
 	char	**path;
@@ -91,20 +91,18 @@ int			check_cmd(char *cmd, char **arg, char **env)
 	ret = 1;
 	if (!check_path(cmd))
 	{
-		path = get_cmd_path(env);
+		path = get_cmd_path(envi);
 		while (path[++i] && ret)
 		{
 			newpath = ft_strjoin(path[i], "/");
 			newcmd = ft_strjoin(newpath, cmd);
 			if (!access(newcmd, F_OK))
-				ret = exe_cmd(newcmd, arg, env);
+				ret = exe_cmd(newcmd, arg, envi);
 			free(newcmd);
 			free(newpath);
 		}
 	}
 	else if (!access(cmd, F_OK))
-	{
-		ret = exe_cmd(cmd, arg, env);
-	}
+		ret = exe_cmd(cmd, arg, envi);
 	return (ret);
 }

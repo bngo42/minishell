@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:43:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/08 18:19:34 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/09 18:32:05 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void		freetab(char ***tab)
 	int i;
 	
 	i = 0;
-	while (*tab[i])
+	while ((*tab)[i])
 	{
-		ft_strdel(&(*tab[i]));
+		ft_strdel(&(*tab)[i]);
 		i++;
 	}
 	free(*tab);
@@ -43,16 +43,19 @@ void		freelst(t_env **lst)
 {
 	t_env *tmp;
 
-	tmp = *lst;
-	*lst = (*lst)->next;
-	while (tmp)
+	if (lst)
 	{
-		ft_strdel(&tmp->name);
-		ft_strdel(&tmp->value);
-		tmp->next = NULL;
-		free(tmp);
 		tmp = *lst;
 		*lst = (*lst)->next;
+		while (tmp->next)
+		{
+			ft_strdel(&tmp->name);
+			ft_strdel(&tmp->value);
+			tmp->next = NULL;
+			free(tmp);
+			tmp = *lst;
+			*lst = (*lst)->next;
+		}
 	}
 }
 
