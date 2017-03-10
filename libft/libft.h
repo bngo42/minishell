@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 11:28:10 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/09 18:13:41 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/10 17:56:52 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,6 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 char				**ft_cpytab(char **tab);
 void				ft_puttab(char **tab);
+char				*ft_trstr(char *str, int count);
+char				*ft_trrstr(char *str, int count);
 #endif

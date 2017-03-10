@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 14:29:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/09 18:35:39 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/10 17:06:56 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,14 @@ int			update_vartab(char *name, char *value, t_globenv *envi)
 		tmp = tmp->next;
 	}
 	return (0);
+}
+
+char		*trijoin(char *s1, char *s2, char *s3)
+{
+	char *res;
+	char *tmp;
+
+	tmp = ft_strjoin(s2, s3);
+	res = ft_strjoin(s1, tmp);
+	return (res);
 }
