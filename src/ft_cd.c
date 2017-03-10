@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 19:11:22 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/10 13:04:53 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/10 13:07:54 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,14 @@ int			check_dir(char *path)
 			return (1);
 		else if (filestat.st_mode & S_IFREG)
 		{
-			ft_putendl("cd: not a directory: [FILENAME]");
+			ft_putstr("cd: not a directory: ");
+			ft_putendl("[FILENAME]");
 		}
 	}
 	else
-		ft_putendl("cd: not such file or directory: [FILENAME]");
+	{
+		ft_putstr("cd: not such file or directory: ");
+		ft_putendl("[FILENAME]");
+	}
 	return (0);
 }
