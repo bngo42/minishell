@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/09 16:49:28 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/10 16:22:46 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int			main(int argc, char **argv, char **envp)
 	envi->envlst = convert_env((!envp) ? envi->envtab : envp);
 	while (1)
 	{
-		ft_putstr("[MINISHELL] ");
+		ft_putstr("[BOBISHELL] ");
 		read_cmd(arg, envi);
 	}
 	return (0);

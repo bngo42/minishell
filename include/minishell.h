@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:30:19 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/09 19:58:07 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/10 15:27:42 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,5 @@ char				*gettabvalue(char *name, t_globenv *env);
 int					update_vartab(char*name, char *value, t_globenv *envi);
 
 int					check_dir(char *path);
+char				*pathhome(char *path, t_globenv *envi);
 #endif
