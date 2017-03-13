@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 19:11:22 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/13 13:03:47 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/13 20:36:47 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,10 @@ int			check_dir(char *path)
 		if (filestat.st_mode & S_IFDIR)
 			return (1);
 		else if (filestat.st_mode & S_IFREG)
-		{
-			ft_putstr("cd: not a directory: ");
-			ft_putendl("[FILENAME]");
-		}
+			ft_putendl("cd: not a directory");
 	}
 	else
-	{
-		ft_putstr("cd: not such file or directory: ");
-		ft_putendl("[FILENAME]");
-	}
+		ft_putendl("cd: not such file or directory");
 	return (0);
 }
 
@@ -72,3 +66,61 @@ char		*filterpath(char *path)
 	}
 	return (res);
 }
+
+char		*redirect(char *path)
+{
+	char	**tmp;
+	char	*res;
+	char	*tmp2;
+	int		i;
+	int		j;
+
+	i = -1;
+	res = NULL;
+	if ((tmp = ft_strsplit(path, '/')))
+	{
+		while (tmp[++i])
+		{
+			if (ft_strcmp(tmp[i], "..") == 0)
+			{
+				j = i;
+				while (j > 0 && tmp[j] == 0)
+					j--;
+				tmp[i] = 0;
+				tmp[j] = 0;
+			}
+		}
+		j = 0;
+		while (j < i)
+		{
+			if (tmp[j])
+			{
+				tmp2 = trijoin(res,"/", tmp[j]);
+				res = ft_strdup(tmp2);
+				if (tmp2)
+					free(tmp2);
+			}
+			j++;
+		}
+	}
+	return (res);
+}
+
+void		setpath(char *path, char *old, t_globenv *envi)
+{
+	char	*buff;
+
+	buff = NULL;
+	if (check_dir(path))
+	{
+		if (chdir(path) == 0)
+		{
+			update_vartab("OLDPWD", old, envi);
+			update_vartab("PWD", redirect(path), envi);
+		}
+	}
+}
+
+
+
+

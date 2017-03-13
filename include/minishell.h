@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:30:19 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/10 17:08:03 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/13 20:00:29 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct		s_globenv
 {
 	char			**envtab;
 	t_env			*envlst;
+	char			*cpath;
 }					t_globenv;
 
 typedef struct		s_built
@@ -61,5 +62,6 @@ char				*trijoin(char *s1, char *s2, char *s3);
 
 int					check_dir(char *path);
 char				*pathhome(char *path, t_globenv *envi);
+void				setpath(char *path, char *old, t_globenv *envi);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 19:46:16 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/09 16:00:01 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/13 20:03:22 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void        add_env(t_env **lst, t_env *new)
 
 void		init_env(t_globenv *envi)
 {
+	char	*buff;
+
+	buff = NULL;
+	envi->cpath = getcwd(buff, 512);
 	if ((envi->envtab = (char**)malloc(sizeof(char*) * 7)))
 	{
 		envi->envtab[0] = ft_strdup("PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/munki");

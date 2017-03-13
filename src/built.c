@@ -6,33 +6,58 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/13 14:49:59 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/13 18:33:40 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int			echo_func(char **str, t_globenv *envi)
+void		printenv(char *str, t_globenv *envi)
 {
-	int i;
-	int j;
-	int	quot[2];
+	int		i;
+	int		j;
+	char	*tmp;
+	char	*tmp2;
 
 	i = 0;
-	quot[0] = 0;
-	quot[1] = 0;
+	j = 0;
+	while (str[i] && str[i] != ' ' && str[i] != '\t')
+		i++;
+	tmp = ft_strsub(str, 0, i);
+	tmp2 = getlstvalue(tmp, envi);
+	ft_putendl(tmp2);
+	if (tmp)
+		free(tmp);
+	if (tmp2)
+		free(tmp2);
+}
+
+int			echo_func(char **str, t_globenv *envi)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	*tmp;
+	char	*tmp2;
+
+	i = 0;
 	while (str[++i])
 	{
 		j = -1;
 		while (str[i][++j])
 		{
-			if (str[i][j] == '\'' && quot[1] == 0)
-				quot[0] = (quot[0] == 1) ? 0 : 1;
-			if (str[i][j] == '"' && quot[0] == 0)
-				quot[1] = (quot[1] == 1) ? 0 : 1;
-			if ((str[i][j] == '\'' && quot[1]) || (str[i][j] == '"' && quot[0])
-					|| (str[i][j] != '\'' && str[i][j] != '"'))
-			ft_putchar(str[i][j]);
+			if (str[i][j] == '$')
+			{
+				k = 0;
+				while (str[i][j + k] != ' ' && str[i][j + k] != '\t')
+					k++;
+				tmp = ft_strsub(str[i], j, k);
+				tmp = getlstvalue(tmp, envi);
+			}
+			if (tmp)
+				ft_putstr(tmp);
+			else
+				ft_putchar(str[i][j]);
 		}
 		if (str[i + 1])
 			ft_putchar(' ');
@@ -44,37 +69,30 @@ int			echo_func(char **str, t_globenv *envi)
 int			cd_func(char **str, t_globenv *envi)
 {
 	char	*path;
-	char	*tmp2;
+	char	*tmp;
 	char	*buff;
 
 	path = NULL;
 	buff = NULL;
-	tmp2 = getlstvalue("PWD", envi);
+	tmp = getlstvalue("PWD", envi);
 	if (str[1])
 	{
-		ft_putendl("PATH1");
 		if (str[1][0] == '~')
 			path = pathhome(str[1], envi);
 		else if (ft_strcmp(str[1], "-") == 0)
 			path = getlstvalue("OLDPWD", envi);
 		else if (str[1][0] != '/')
-			path = trijoin(tmp2, "/", str[1]);
+			path = trijoin(tmp, "/", str[1]);
 		else
 			path = ft_strdup(str[1]);
 	}
 	else
 		path = getlstvalue("HOME", envi);
-	ft_putendl("TOTO");
-	if (check_dir(path))
-	{
-		if (chdir(path) == 0)
-		{
-			update_vartab("OLDPWD", tmp2, envi);
-			update_vartab("PWD", getcwd(buff, 512), envi);
-		}
-	}
+	setpath(path, tmp, envi);
 	if (path)
 		free(path);
+	if (tmp)
+		free(tmp);
 	return (0);
 }
 
