@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/10 18:46:56 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/13 14:49:59 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,31 +45,36 @@ int			cd_func(char **str, t_globenv *envi)
 {
 	char	*path;
 	char	*tmp2;
+	char	*buff;
 
 	path = NULL;
+	buff = NULL;
 	tmp2 = getlstvalue("PWD", envi);
 	if (str[1])
 	{
+		ft_putendl("PATH1");
 		if (str[1][0] == '~')
 			path = pathhome(str[1], envi);
 		else if (ft_strcmp(str[1], "-") == 0)
 			path = getlstvalue("OLDPWD", envi);
 		else if (str[1][0] != '/')
-		{
-			tmp2 = ft_trstr(tmp2, 1);
 			path = trijoin(tmp2, "/", str[1]);
-		}
 		else
 			path = ft_strdup(str[1]);
 	}
 	else
 		path = getlstvalue("HOME", envi);
+	ft_putendl("TOTO");
 	if (check_dir(path))
 	{
-		update_vartab("OLDPWD", tmp2, envi);
-		update_vartab("PWD", path, envi);
-		chdir(path);
+		if (chdir(path) == 0)
+		{
+			update_vartab("OLDPWD", tmp2, envi);
+			update_vartab("PWD", getcwd(buff, 512), envi);
+		}
 	}
+	if (path)
+		free(path);
 	return (0);
 }
 

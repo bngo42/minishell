@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 19:11:22 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/10 16:17:43 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/13 13:03:47 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,30 @@ char		*pathhome(char *path, t_globenv *envi)
 		tmp = getlstvalue("HOME", envi);
 		path++;
 		newpath = ft_strjoin(tmp, path);
-		free(tmp);
+		if (tmp)
+			free(tmp);
 		ft_putendl(newpath);
 	}
 	return (newpath);
+}
+
+
+char		*filterpath(char *path)
+{
+	char	*res;
+	int		i;
+	int		j;
+	int		len;
+
+	i = 0;
+	j = 0;
+	len = ft_strlen(path);
+	if (path[len] == '/')
+		len--;
+	res = (char*)malloc(sizeof(char) * ft_strlen(path));
+	while (i < len)
+	{
+			res[j++] = path[i++];
+	}
+	return (res);
 }

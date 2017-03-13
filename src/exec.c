@@ -6,37 +6,11 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 19:30:48 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/09 16:49:51 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/13 12:38:34 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-int			check_path(char *str)
-{
-	int i;
-	int j;
-	int state;
-	char *path;
-
-	i = ft_strlen(str);
-	j = 0;
-	state = 0;
-	path = NULL;
-	while (i > 0 && str[i - 1] != '/')
-		i--;
-	if (i <= 0)
-		return (state);
-	else
-	{
-		path = ft_strsub(str, 0, i);
-		if (ft_strcmp(path, "/bin/") == 0)
-			state = 1;
-	}
-	if (path)
-		free(path);
-	return (state);
-}
 
 char		**get_cmd_path(t_globenv *envi)
 {
@@ -89,7 +63,9 @@ int			check_cmd(char *cmd, char **arg, t_globenv *envi)
 
 	i = -1;
 	ret = 1;
-	if (!check_path(cmd))
+	if (!access(cmd, F_OK))
+		ret = exe_cmd(cmd, arg, envi);
+	else
 	{
 		path = get_cmd_path(envi);
 		while (path[++i] && ret)
@@ -98,11 +74,11 @@ int			check_cmd(char *cmd, char **arg, t_globenv *envi)
 			newcmd = ft_strjoin(newpath, cmd);
 			if (!access(newcmd, F_OK))
 				ret = exe_cmd(newcmd, arg, envi);
-			free(newcmd);
-			free(newpath);
+			if (newcmd)
+				free(newcmd);
+			if (newpath)
+				free(newpath);
 		}
 	}
-	else if (!access(cmd, F_OK))
-		ret = exe_cmd(cmd, arg, envi);
 	return (ret);
 }

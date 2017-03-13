@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 14:29:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/10 17:06:56 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/13 14:01:35 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ char		**convert_lst(t_env *lst)
 	{
 		var = ft_strjoin(temp->name, "=");
 		tmp[i] = ft_strjoin(var, temp->value);
-		free(var);
+		if (var)
+			free(var);
 		i++;
 		temp = temp->next;
 	}
@@ -89,10 +90,10 @@ int			update_vartab(char *name, char *value, t_globenv *envi)
 	tmp = envi->envlst;
 	while (tmp)
 	{
-		if (ft_strcmp(name, tmp->name) == 0 && value)
+		if (ft_strcmp(name, tmp->name) == 0)
 		{
 			ft_strdel(&tmp->value);
-			tmp->value = ft_strdup(value);
+			tmp->value = (value) ? ft_strdup(value) : NULL;
 			freetab(&envi->envtab);
 			envi->envtab = convert_lst(envi->envlst);
 			return (1);
