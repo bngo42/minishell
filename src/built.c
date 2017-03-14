@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/13 18:33:40 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/14 20:02:50 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,35 +32,17 @@ void		printenv(char *str, t_globenv *envi)
 		free(tmp2);
 }
 
-int			echo_func(char **str, t_globenv *envi)
+int		echo_func(char **str, t_globenv *envi)
 {
 	int		i;
-	int		j;
-	int		k;
-	char	*tmp;
-	char	*tmp2;
 
 	i = 0;
-	while (str[++i])
+	while (str[i])
 	{
-		j = -1;
-		while (str[i][++j])
-		{
-			if (str[i][j] == '$')
-			{
-				k = 0;
-				while (str[i][j + k] != ' ' && str[i][j + k] != '\t')
-					k++;
-				tmp = ft_strsub(str[i], j, k);
-				tmp = getlstvalue(tmp, envi);
-			}
-			if (tmp)
-				ft_putstr(tmp);
-			else
-				ft_putchar(str[i][j]);
-		}
+		ft_putendl(str[i]);
 		if (str[i + 1])
 			ft_putchar(' ');
+		i++;
 	}
 	ft_putchar('\n');
 	return (0);
