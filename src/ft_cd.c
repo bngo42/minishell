@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 19:11:22 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/14 18:43:08 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/15 15:34:06 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char		*pathhome(char *path, t_globenv *envi)
 		newpath = ft_strjoin(tmp, path);
 		if (tmp)
 			free(tmp);
-		ft_putendl(newpath);
 	}
 	return (newpath);
 }
@@ -90,8 +89,8 @@ char		*redirect(char *path)
 				tmp[j] = 0;
 			}
 		}
-		j = 0;
-		while (j < i)
+		j = -1;
+		while (++j < i)
 		{
 			if (tmp[j])
 			{
@@ -100,8 +99,8 @@ char		*redirect(char *path)
 				if (tmp2)
 					free(tmp2);
 			}
-			j++;
 		}
+		freetab(tmp);
 	}
 	return (res);
 }
@@ -119,6 +118,12 @@ void		setpath(char *path, char *old, t_globenv *envi)
 			update_vartab("PWD", getcwd(buff, 512), envi);
 		}
 	}
+	if (buff)
+		free(buff);
+	if (path)
+		free(path);
+	if (old)
+		free(old);
 }
 
 

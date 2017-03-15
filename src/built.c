@@ -6,31 +6,11 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/14 20:02:50 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/15 18:10:00 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void		printenv(char *str, t_globenv *envi)
-{
-	int		i;
-	int		j;
-	char	*tmp;
-	char	*tmp2;
-
-	i = 0;
-	j = 0;
-	while (str[i] && str[i] != ' ' && str[i] != '\t')
-		i++;
-	tmp = ft_strsub(str, 0, i);
-	tmp2 = getlstvalue(tmp, envi);
-	ft_putendl(tmp2);
-	if (tmp)
-		free(tmp);
-	if (tmp2)
-		free(tmp2);
-}
 
 int		echo_func(char **str, t_globenv *envi)
 {
@@ -57,24 +37,20 @@ int			cd_func(char **str, t_globenv *envi)
 	path = NULL;
 	buff = NULL;
 	tmp = getlstvalue("PWD", envi);
-	if (str[1])
+	if (str[1] && str[1][0] == '~')
+		path = pathhome(str[1], envi);
+	else if (str[1] && ft_strcmp(str[1], "-") == 0)
 	{
-		if (str[1][0] == '~')
-			path = pathhome(str[1], envi);
-		else if (ft_strcmp(str[1], "-") == 0)
-			path = getlstvalue("OLDPWD", envi);
-		else if (str[1][0] != '/')
-			path = trijoin(tmp, "/", str[1]);
-		else
-			path = ft_strdup(str[1]);
+		path = getlstvalue("OLDPWD", envi);
+		ft_putendl(path);
 	}
+	else if (str[1] && str[1][0] != '/')
+		path = trijoin(tmp, "/", str[1]);
+	else if (str[1])
+		path = ft_strdup(str[1]);
 	else
 		path = getlstvalue("HOME", envi);
 	setpath(path, tmp, envi);
-	if (path)
-		free(path);
-	if (tmp)
-		free(tmp);
 	return (0);
 }
 
@@ -92,22 +68,20 @@ int			unsetenv_func(char **str, t_globenv *envi)
 
 int			env_func(char **str, t_globenv *envi)
 {
-	t_env *tmp;
+	int		i;
 
-	tmp = envi->envlst;
-	if (str[1] && ft_strcmp(str[1], "-i") == 0)
-		ft_putchar('i');
-	else if (str[1] && ft_strcmp(str[1], "-v") == 0)
-		ft_putchar('i');
-	else
+	i = 0;
+	while (str[++i])
 	{
-		while (tmp)
-		{
-			ft_putstr(tmp->name);
-			ft_putchar('=');
-			ft_putendl(tmp->value);
-			tmp = tmp->next;
-		}
+		if (check_cmd(str[i], &str[i], envi) == 0)
+			return (0);
+	}
+	i = 0;
+	showtab(envi->envtab);
+	while (str[++i])
+	{
+		if (ft_strchr(str[i], '='))
+			ft_putendl(str[i]);
 	}
 	return (0);
 }

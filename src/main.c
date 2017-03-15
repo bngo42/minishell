@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/10 16:22:46 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/15 17:53:03 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ int			get_func(char **str, t_globenv *envi)
 	return (0);
 }
 
-void		read_cmd(char **arg, t_globenv *envi)
+void		read_cmd(t_globenv *envi)
 {
 	char *line;
 	int		ret;
+	char	**arg;
 
 	line = NULL;
+	arg = NULL;
 	get_next_line(0, &line);
 	if (line && line[0] != '\0')
 	{
@@ -48,8 +50,10 @@ void		read_cmd(char **arg, t_globenv *envi)
 			ft_putstr_fd("command not found: ", 2);
 			ft_putendl_fd(arg[0], 2);
 		}
+		if (arg)
+			freetab(arg);
+		ft_strdel(&line);
 	}
-	ft_strdel(&line);
 }
 
 void		showtab(char **tab)
@@ -64,19 +68,18 @@ void		showtab(char **tab)
 int			main(int argc, char **argv, char **envp)
 {
 	char		*line;
-	char		**arg;
 	t_globenv	*envi;
 
 	envi = (t_globenv*)malloc(sizeof(t_globenv));
-	if (!envp)
+	if (!envp[0])
 		init_env(envi);
 	else
 		envi->envtab = ft_cpytab(envp);
-	envi->envlst = convert_env((!envp) ? envi->envtab : envp);
+	envi->envlst = convert_env((!envp[0]) ? envi->envtab : envp);
 	while (1)
 	{
-		ft_putstr("[BOBISHELL] ");
-		read_cmd(arg, envi);
+		ft_putstr("[BOBI-MISHELL] ");
+		read_cmd(envi);
 	}
 	return (0);
 }

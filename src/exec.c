@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 19:30:48 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/13 12:38:34 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/15 17:19:26 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,13 @@ char		**get_cmd_path(t_globenv *envi)
 		if ((tmp = ft_strsplit(envi->envtab[i], '=')))
 		{
 			if (tmp[0] && ft_strcmp(tmp[0], "PATH") == 0)
+			{
 				path = ft_strsplit(tmp[1], ':');
+				freetab(tmp);
+				return (path);
+			}
+			freetab(tmp);
 		}
-		if (tmp)
-			free(tmp);
 		i++;
 	}
 	return (path);
@@ -80,5 +83,7 @@ int			check_cmd(char *cmd, char **arg, t_globenv *envi)
 				free(newpath);
 		}
 	}
+	if (path)
+		freetab(path);
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:30:19 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/13 20:00:29 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/15 18:09:01 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct		s_built
 	int				(*built)(char **str, t_globenv *env);
 }					t_built;
 
+void				showtab(char **tab);
+
 int					echo_func(char **str, t_globenv *envi);
 int					cd_func(char **str, t_globenv *envi);
 int					setenv_func(char **str, t_globenv *envi);
@@ -52,7 +54,7 @@ t_env				*convert_env(char **env);
 int					check_cmd(char *path, char **arg, t_globenv *envi);
 
 int					listlength(t_env *lst);
-void				freetab(char ***tab);
+void				freetab(char **tab);
 void				freelst(t_env **lst);
 void				update_env(char **env, t_env*lst);
 char				*getlstvalue(char *name, t_globenv *env);

@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 19:46:16 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/13 20:03:22 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/15 17:12:55 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ void		init_env(t_globenv *envi)
 		envi->envtab[2] = ft_strdup("LOGNAME=bngo");
 		envi->envtab[3] = ft_strdup("SHLVL=1");
 		envi->envtab[4] = ft_strdup("PWD=/Users/bngo");
-		envi->envtab[5] = ft_strdup("OLDPWD=");
+		envi->envtab[5] = ft_strdup("OLDPWD=/Users/bngo");
 		envi->envtab[6] = 0;
 	}
+	if (buff)
+		ft_strdel(&buff);
 }
 
 t_env		*init_link(char *name, char *value)
@@ -53,9 +55,9 @@ t_env		*init_link(char *name, char *value)
 	new->value = ft_strdup(value);
 	new->next = NULL;
 	if (name)
-		free(name);
+		ft_strdel(&name);
 	if (value)
-		free(value);
+		ft_strdel(&value);
 	return (new);
 }
 
@@ -87,11 +89,11 @@ t_env		*convert_env(char **env)
 	{
 		i = 0;
 		if ((tmp = ft_strsplit(env[i], '=')))
+		{
 			lst = init_link(tmp[0], tmp[1]);
+		}
 		while (env[++i])
 		{
-			if (tmp)
-				free(tmp);
 			if ((tmp = ft_strsplit(env[i], '=')))
 			{
 				new = init_link(tmp[0], tmp[1]);
