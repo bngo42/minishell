@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/16 13:56:08 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/16 14:58:02 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int			setenv_func(char **str, t_globenv *envi)
 			if (str[i][j] == '=')
 			{
 				if (str[i][j - 1] != '=' && j > 0)
-					ft_putendl(str[i]);
+					newenv(str[i], envi);
 				else
 				{
 					ft_putstr("BOBI-MISHELL: ");
