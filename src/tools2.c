@@ -6,11 +6,21 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 14:29:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/15 15:33:52 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/16 14:01:50 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+char		*trijoin(char *s1, char *s2, char *s3)
+{
+	char *res;
+	char *tmp;
+
+	tmp = ft_strjoin(s2, s3);
+	res = ft_strjoin(s1, tmp);
+	return (res);
+}
 
 char		*getlstvalue(char *name, t_globenv *envi)
 {
@@ -56,7 +66,6 @@ char		*gettabvalue(char *name, t_globenv *envi)
 char		**convert_lst(t_env *lst)
 {
 	char	**tmp;
-	char	*var;
 	int		i;
 	t_env	*temp;
 
@@ -74,11 +83,7 @@ char		**convert_lst(t_env *lst)
 	i = 0;
 	while (temp)
 	{
-		var = ft_strjoin(temp->name, "=");
-		tmp[i] = ft_strjoin(var, temp->value);
-		if (var)
-			free(var);
-		i++;
+		tmp[i++] = trijoin(temp->name, "=", temp->value);
 		temp = temp->next;
 	}
 	tmp[i] = 0;
@@ -103,14 +108,4 @@ int			update_vartab(char *name, char *value, t_globenv *envi)
 		tmp = tmp->next;
 	}
 	return (0);
-}
-
-char		*trijoin(char *s1, char *s2, char *s3)
-{
-	char *res;
-	char *tmp;
-
-	tmp = ft_strjoin(s2, s3);
-	res = ft_strjoin(s1, tmp);
-	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 19:46:16 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/16 13:21:22 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/16 14:09:45 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,6 @@ t_env		*init_link(char *name, char *value)
 	if (value)
 		ft_strdel(&value);
 	return (new);
-}
-
-void		push_link(t_env **lst, t_env *newlink)
-{
-	t_env *tmp;
-
-	tmp = *lst;
-	if (!(*lst))
-		*lst = newlink;
-	else
-	{
-		while ((*lst)->next)
-			*lst = (*lst)->next;
-		(*lst)->next = newlink;
-		*lst = tmp;
-	}
 }
 
 t_env		*convert_env(char **env)

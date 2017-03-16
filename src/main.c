@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/15 17:53:03 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/16 13:28:43 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,6 @@ void		read_cmd(t_globenv *envi)
 			freetab(arg);
 		ft_strdel(&line);
 	}
-}
-
-void		showtab(char **tab)
-{
-	int i;
-
-	i = 0;
-	while (tab[i])
-		ft_putendl(tab[i++]);
 }
 
 int			main(int argc, char **argv, char **envp)

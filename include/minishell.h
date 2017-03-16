@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:30:19 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/16 13:26:56 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/16 14:10:05 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int					exit_func(char **str, t_globenv *envi);
 void				add_env(t_env **lst, t_env *newlink);
 void				init_env(t_globenv *envi);
 t_env				*init_link(char *name, char *value);
-void				push_link(t_env	**lst, t_env *newlink);
 t_env				*convert_env(char **env);
 
 /*
@@ -78,7 +77,6 @@ void				update_env(char **env, t_env*lst);
 */
 int					get_func(char **str, t_globenv *envi);
 void				read_cmd(t_globenv *envi);
-void				showtab(char **tab);
 
 /*
  **TOOLS2.C

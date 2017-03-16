@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/16 13:01:29 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/16 13:56:08 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,29 @@ int			cd_func(char **str, t_globenv *envi)
 
 int			setenv_func(char **str, t_globenv *envi)
 {
-	ft_putendl("BUILTIN SETENV");
+	int		i;
+	int		j;
+
+	i = 0;
+	while (str[++i])
+	{
+		j = -1;
+		while (str[i][++j])
+		{
+			if (str[i][j] == '=')
+			{
+				if (str[i][j - 1] != '=' && j > 0)
+					ft_putendl(str[i]);
+				else
+				{
+					ft_putstr("BOBI-MISHELL: ");
+					ft_putstr(str[i]);
+					ft_putendl(" not found");
+					return (0);
+				}
+			}
+		}
+	}
 	return (0);
 }
 
@@ -78,7 +100,7 @@ int			env_func(char **str, t_globenv *envi)
 			return (0);
 	}
 	i = 0;
-	showtab(envi->envtab);
+	ft_puttab(envi->envtab);
 	while (str[++i])
 	{
 		j = -1;

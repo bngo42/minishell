@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:43:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/15 15:27:55 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/16 14:12:36 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void		update_env(char **env, t_env *lst)
 	{
 		var = ft_strjoin(tmp->name, tmp->value);
 		newenv[i] = ft_strdup(var);
+		printf("NEWEV[%i] = [%s]\n", i, var);
 		free(var);
 		free(tmp->name);
 		if (tmp->value)
