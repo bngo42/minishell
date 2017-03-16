@@ -6,7 +6,7 @@
 #    By: bngo <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/05 11:40:59 by bngo              #+#    #+#              #
-#    Updated: 2017/03/09 20:01:27 by bngo             ###   ########.fr        #
+#    Updated: 2017/03/16 13:15:14 by bngo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ CFILES = main.c \
 		 exec.c \
 		 tools.c \
 		 tools2.c \
-		 ft_cd.c
+		 ft_cd.c \
+		 ft_env.c
 
 OFILES = $(CFILES:.c=.o)
 HFILES = include/minishell.h libft/libft.h

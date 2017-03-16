@@ -6,22 +6,22 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 19:46:16 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/15 17:12:55 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/16 13:21:22 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void        add_env(t_env **lst, t_env *new)
+void        add_env(t_env **lst, t_env *newlink)
 {
     t_env *tmp;
     
     tmp = *lst;
     if (!(*lst))
-        *lst = new;
+        *lst = newlink;
     while ((*lst)->next)
         *lst = (*lst)->next;
-    (*lst)->next = new;
+    (*lst)->next = newlink;
     *lst = tmp;
 }
 
@@ -61,18 +61,18 @@ t_env		*init_link(char *name, char *value)
 	return (new);
 }
 
-void		push_link(t_env **lst, t_env *new)
+void		push_link(t_env **lst, t_env *newlink)
 {
 	t_env *tmp;
 
 	tmp = *lst;
 	if (!(*lst))
-		*lst = new;
+		*lst = newlink;
 	else
 	{
 		while ((*lst)->next)
 			*lst = (*lst)->next;
-		(*lst)->next = new;
+		(*lst)->next = newlink;
 		*lst = tmp;
 	}
 }

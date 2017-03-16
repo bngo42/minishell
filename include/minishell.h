@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:30:19 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/15 18:09:01 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/16 13:26:56 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ typedef struct		s_built
 	int				(*built)(char **str, t_globenv *env);
 }					t_built;
 
-void				showtab(char **tab);
-
+/*
+ **BUILT.C
+*/
 int					echo_func(char **str, t_globenv *envi);
 int					cd_func(char **str, t_globenv *envi);
 int					setenv_func(char **str, t_globenv *envi);
@@ -48,22 +49,52 @@ int					unsetenv_func(char **str, t_globenv *envi);
 int					env_func(char **str, t_globenv *envi);
 int					exit_func(char **str, t_globenv *envi);
 
+/*
+ **ENV.C
+*/
+void				add_env(t_env **lst, t_env *newlink);
 void				init_env(t_globenv *envi);
+t_env				*init_link(char *name, char *value);
+void				push_link(t_env	**lst, t_env *newlink);
 t_env				*convert_env(char **env);
 
+/*
+ **EXEC.C
+*/
+char				**get_cmd_path(t_globenv *envi);
+int					exe_cmd(char *path, char **arg, t_globenv *envi);
 int					check_cmd(char *path, char **arg, t_globenv *envi);
 
+/*
+ **TOOLS.C
+*/
 int					listlength(t_env *lst);
 void				freetab(char **tab);
 void				freelst(t_env **lst);
 void				update_env(char **env, t_env*lst);
+
+/*
+ **MAIN.C
+*/
+int					get_func(char **str, t_globenv *envi);
+void				read_cmd(t_globenv *envi);
+void				showtab(char **tab);
+
+/*
+ **TOOLS2.C
+*/
 char				*getlstvalue(char *name, t_globenv *env);
 char				*gettabvalue(char *name, t_globenv *env);
 int					update_vartab(char*name, char *value, t_globenv *envi);
 char				*trijoin(char *s1, char *s2, char *s3);
 
+/*
+ **FT_CD.C
+*/
 int					check_dir(char *path);
 char				*pathhome(char *path, t_globenv *envi);
+char				*filterpath(char *path);
+char				*redirect(char *path);
 void				setpath(char *path, char *old, t_globenv *envi);
 
 #endif
