@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:14:21 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/16 15:26:07 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/17 13:50:58 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,20 @@ int			update_envtab(t_globenv *envi)
 	int		i;
 
 	i = 0;
+	ft_putendl("[START UPDATE ENVTAB]");
 	if (!(res = (char**)malloc(sizeof(char*) * listlength(envi->envlst))))
 		return (-1);
+	ft_putendl("[MALLOC NEW TAB]");
 	tmp = envi->envlst;
 	while (tmp)
 	{
 		res[i++] = trijoin(tmp->name, "=", tmp->value);
 		tmp = tmp->next;
 	}
+	ft_putendl("[COPY IN NEW TAB]");
 	res[i] = 0;
 	freetab(envi->envtab);
+	ft_putendl("[FREEING NEW TAB]");
 	envi->envtab = res;
 	return (0);
 }
@@ -47,13 +51,16 @@ int			newenv(char *str, t_globenv *envi)
 	{
 	printf("Updating env with [%s] => [%s]\n", tmp[0], tmp[1]);
 		newlink->name = ft_strdup(tmp[0]);
+	ft_putendl("DUPLICATE TMP 0");
 		newlink->value = ft_strdup(tmp[1]);
-	ft_putendl("DEBUG");
+	ft_putendl("DUPLICATE TMP !");
 		add_env(&envi->envlst, newlink);
+	ft_putendl("ADD ENV");
 		freetab(tmp);
+	ft_putendl("FREETAB tmp");
 		update_envtab(envi);
+	ft_putendl("UPDATE ENVTAB");
 	}
-	ft_putendl("DEBUG");
 	return (0);
 }
 

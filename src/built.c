@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/16 14:58:02 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/17 13:33:40 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,28 @@ int			setenv_func(char **str, t_globenv *envi)
 
 int			unsetenv_func(char **str, t_globenv *envi)
 {
-	ft_putendl("BUILTIN UNSETENV");
+	t_env	*tmp;
+	t_env	*del;
+	int		i;
+
+	i = 0;
+	while (str[++i])
+	{
+		tmp = envi->envlst;
+		while (tmp->next)
+		{
+			printf("COMPARING: [%s] and [%s]\n", str[i], tmp->next->name);
+			if (ft_strcmp(str[i], tmp->next->name) == 0)
+			{
+				del = tmp->next;
+				tmp->next = del->next;
+				ft_strdel(&del->name);
+				ft_strdel(&del->value);
+				free(del);
+			}
+			tmp = tmp->next;
+		}
+	}
 	return (0);
 }
 
