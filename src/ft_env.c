@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:14:21 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/17 13:50:58 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/20 13:00:37 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int			newenv(char *str, t_globenv *envi)
 	printf("Updating env with [%s] => [%s]\n", tmp[0], tmp[1]);
 		newlink->name = ft_strdup(tmp[0]);
 	ft_putendl("DUPLICATE TMP 0");
-		newlink->value = ft_strdup(tmp[1]);
+		newlink->value = (tmp[1]) ? ft_strdup(tmp[1]) : ft_strnew(0);
+	newlink->next = NULL;
 	ft_putendl("DUPLICATE TMP !");
 		add_env(&envi->envlst, newlink);
 	ft_putendl("ADD ENV");

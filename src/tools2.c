@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 14:29:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/16 15:06:16 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/20 12:59:27 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,25 @@ char		*trijoin(char *s1, char *s2, char *s3)
 	char *res;
 	char *tmp;
 
-	tmp = ft_strjoin(s2, s3);
-	res = ft_strjoin(s1, tmp);
+	if (s1 && !s2 && !s3)
+		res = ft_strdup(s1);
+	else if (!s1 && s2 && !s3)
+		res = ft_strdup(s2);
+	else if (!s1 && !s2 && s3)
+		res = ft_strdup(s3);
+	else if (s1 && s2 && !s3)
+		res = ft_strjoin(s1, s2);
+	else if (s1 && !s2 && s3)
+		res = ft_strjoin(s1, s3);
+	else if (!s1 && s2 && s3)
+		res = ft_strjoin(s2, s3);
+	else
+	{
+		tmp = ft_strjoin(s2, s3);
+		res = ft_strjoin(s1, tmp);
+	}
+	if (tmp)
+		free(tmp);
 	return (res);
 }
 
@@ -100,7 +117,7 @@ int			update_vartab(char *name, char *value, t_globenv *envi)
 		if (ft_strcmp(name, tmp->name) == 0)
 		{
 			ft_strdel(&tmp->value);
-			tmp->value = (value) ? ft_strdup(value) : NULL;
+			tmp->value = (value) ? ft_strdup(value) : ft_strnew(0);
 			freetab(envi->envtab);
 			envi->envtab = convert_lst(envi->envlst);
 			return (1);

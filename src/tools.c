@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:43:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/17 13:52:18 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/20 12:43:09 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void		freetab(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		ft_strdel(&tab[i]);
+		if (tab[i])
+			ft_strdel(&tab[i]);
 		i++;
 	}
 	ft_strdel(&tab[i]);
