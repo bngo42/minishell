@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 18:20:25 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 19:04:26 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ int			main(int argc, char **argv, char **envp)
 	if (!envp[0])
 		init_env(envi);
 	else
-		envi->envtab = ft_cpytab(envp);
-	envi->envlst = convert_env((!envp[0]) ? envi->envtab : envp);
+		envi->envlst = convert_env(envp);
 	while (1)
 	{
 		ft_putstr("[BOBI-MISHELL] ");
@@ -80,3 +79,7 @@ int			main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
+
+
+
+

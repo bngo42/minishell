@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 19:46:16 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 17:38:43 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 19:07:09 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ void		init_env(t_globenv *envi)
 
 	buff = NULL;
 	envi->cpath = getcwd(buff, 512);
-	if ((envi->envtab = (char**)malloc(sizeof(char*) * 7)))
+	if ((envi->envlst = (t_env*)malloc(sizeof(t_env))))
 	{
-		envi->envtab[0] = ft_strdup("PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/munki");
-		envi->envtab[1] = ft_strdup("HOME=/Users/bngo");
-		envi->envtab[2] = ft_strdup("LOGNAME=bngo");
-		envi->envtab[3] = ft_strdup("SHLVL=1");
-		envi->envtab[4] = ft_strdup("PWD=/Users/bngo");
-		envi->envtab[5] = ft_strdup("OLDPWD=/Users/bngo");
-		envi->envtab[6] = 0;
+		newenv("PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/
+				usr/local/munki", envi);
+		newenv("HOME=/Users/bngo", envi);
+		newenv("LOGNAME=bngo", envi);
+		newenv("SHLVL=1", envi);
+		newenv("PWD=/Users/bngo", envi);
+		newenv("OLDPWD=/Users/bngo", envi);
 	}
 	ft_strdel(&buff);
 }
