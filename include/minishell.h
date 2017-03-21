@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:30:19 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 13:44:23 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 15:09:56 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int					listlength(t_env *lst);
 void				freetab(char **tab);
 void				freelst(t_env **lst);
 void				update_env(char **env, t_env*lst);
-
+void				putlst(t_env *lst);
 /*
  **MAIN.C
 */

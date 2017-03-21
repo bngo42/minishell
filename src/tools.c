@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:43:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 13:29:50 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 15:10:24 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,20 @@ void		freelst(t_env **lst)
 			tmp = *lst;
 			*lst = (*lst)->next;
 		}
+	}
+}
+
+void		putlst(t_env *lst)
+{
+	t_env *tmp;
+
+	tmp = lst;
+	while (tmp)
+	{
+		ft_putstr(tmp->name);
+		ft_putchar('=');
+		ft_putstr(tmp->value);
+		ft_putchar('\n');
+		tmp = tmp->next;
 	}
 }

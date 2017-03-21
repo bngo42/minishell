@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 13:56:10 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 15:23:31 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int			unsetenv_func(char **str, t_globenv *envi)
 		tmp = envi->envlst;
 		while (tmp->next)
 		{
-			printf("COMPARING: [%s] and [%s]\n", str[i], tmp->next->name);
 			if (ft_strcmp(str[i], tmp->next->name) == 0)
 			{
 				del = tmp->next;
@@ -102,8 +101,10 @@ int			unsetenv_func(char **str, t_globenv *envi)
 				ft_strdel(&del->name);
 				ft_strdel(&del->value);
 				free(del);
+				break;
 			}
-			tmp = tmp->next;
+			else
+				tmp = tmp->next;
 		}
 	}
 	return (0);
@@ -121,7 +122,7 @@ int			env_func(char **str, t_globenv *envi)
 			return (0);
 	}
 	i = 0;
-	ft_puttab(envi->envtab);
+	putlst(envi->envlst);
 	while (str[++i])
 	{
 		j = -1;
