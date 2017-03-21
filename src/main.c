@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 18:11:14 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 18:20:25 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,9 @@ int			read_cmd(t_globenv *envi)
 	line = NULL;
 	arg = NULL;
 	ret = get_next_line(0, &line);
-	if (ret == 0)
+	if (ret <= 0)
 	{
-		ft_putendl("exit");
-		exit(0);
-		return (-1);
-	}
-	else if (ret == -1)
-	{
-		ft_putchar('\n');
+		ft_putendl((ret == 0) ? "exit" : "\n");
 		return (-1);
 	}
 	if (line && line[0] != '\0')
