@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 14:55:56 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 18:11:14 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int			get_func(char **str, t_globenv *envi)
 {
 	const t_built	fn[6] = {	{"echo", &echo_func},
-								{"cd", &cd_func},
-								{"setenv", &setenv_func},
-								{"unsetenv", &unsetenv_func},
-								{"env", &env_func},
-								{"exit", &exit_func}};
+		{"cd", &cd_func},
+		{"setenv", &setenv_func},
+		{"unsetenv", &unsetenv_func},
+		{"env", &env_func},
+		{"exit", &exit_func}};
 	int				i;
 
 	i = -1;
@@ -33,7 +33,7 @@ int			get_func(char **str, t_globenv *envi)
 	return (0);
 }
 
-void		read_cmd(t_globenv *envi)
+int			read_cmd(t_globenv *envi)
 {
 	char *line;
 	int		ret;
@@ -41,19 +41,30 @@ void		read_cmd(t_globenv *envi)
 
 	line = NULL;
 	arg = NULL;
-	get_next_line(0, &line);
+	ret = get_next_line(0, &line);
+	if (ret == 0)
+	{
+		ft_putendl("exit");
+		exit(0);
+		return (-1);
+	}
+	else if (ret == -1)
+	{
+		ft_putchar('\n');
+		return (-1);
+	}
 	if (line && line[0] != '\0')
 	{
 		arg = ft_split(line);
+		ft_strdel(&line);
 		if (arg[0] && get_func(arg, envi))
 		{
 			ft_putstr_fd("command not found: ", 2);
 			ft_putendl_fd(arg[0], 2);
 		}
-		if (arg)
-			freetab(arg);
-		ft_strdel(&line);
+		freetab(arg);
 	}
+	return (0);
 }
 
 int			main(int argc, char **argv, char **envp)
@@ -70,7 +81,8 @@ int			main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		ft_putstr("[BOBI-MISHELL] ");
-		read_cmd(envi);
+		if (read_cmd(envi) == -1)
+			return (-1);
 	}
 	return (0);
 }

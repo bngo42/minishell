@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:30:19 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 15:09:56 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 18:08:35 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void				putlst(t_env *lst);
  **MAIN.C
 */
 int					get_func(char **str, t_globenv *envi);
-void				read_cmd(t_globenv *envi);
+int					read_cmd(t_globenv *envi);
 
 /*
  **TOOLS2.C

@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:43:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 15:10:24 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 17:07:59 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void		freetab(char **tab)
 	if (tab)
 		free(tab);
 	tab = NULL;
-	ft_putendl("-=[END OF FREETAB]=-");
 }
 
 void		freelst(t_env **lst)
