@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 19:30:48 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/16 13:42:08 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 13:54:46 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,21 @@ char		**get_cmd_path(t_globenv *envi)
 int			exe_cmd(char *path, char **arg, t_globenv *envi)
 {
 	pid_t	process;
+	char	**env;
 
 	process = fork();
 	if (process == 0)
-		return ((execve(path, arg, envi->envtab)) ? 1 : 0);
+	{
+		
+		env = convert_lst(envi->envlst);
+		if (execve(path, arg, env))
+		{
+			freetab(env);
+			return (1);
+		}
+		else
+			return (0);
+	}
 	else
 		wait (NULL);
 	return (0);

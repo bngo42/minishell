@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:14:21 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/20 13:23:08 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 14:08:42 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int			update_envtab(t_globenv *envi)
 	res[i] = 0;
 	ft_putendl("[COPY IN NEW TAB]");
 	freetab(envi->envtab);
-	ft_putendl("[FREEING NEW TAB]");
-	envi->envtab = res;
+	ft_putendl("[FREE ENVTAB]");
+	envi->envtab = ft_cpytab(res);
 	return (0);
 }
-
+/*
 int			newenv(char *str, t_globenv *envi)
 {
 	char	**tmp;
@@ -64,4 +64,9 @@ int			newenv(char *str, t_globenv *envi)
 	}
 	return (0);
 }
+*/
+int			newenv(char *str, t_globenv *envi)
+{
 
+	return (0);
+}

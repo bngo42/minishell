@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 19:46:16 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 13:30:32 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 12:13:50 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ t_env		*init_link(char *name, char *value)
 	new->name = ft_strdup(name);
 	new->value = ft_strdup(value);
 	new->next = NULL;
+	if (name)
+		ft_strdel(&name);
+	if (value)
+		ft_strdel(&value);
 	return (new);
 }
 
@@ -70,7 +74,6 @@ t_env		*convert_env(char **env)
 		if ((tmp = ft_strsplit(env[i], '=')))
 		{
 			lst = init_link(tmp[0], tmp[1]);
-			freetab(tmp);
 		}
 		while (env[++i])
 		{

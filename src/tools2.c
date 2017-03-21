@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 14:29:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/20 12:59:27 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 13:57:20 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,6 @@ int			update_vartab(char *name, char *value, t_globenv *envi)
 		{
 			ft_strdel(&tmp->value);
 			tmp->value = (value) ? ft_strdup(value) : ft_strnew(0);
-			freetab(envi->envtab);
-			envi->envtab = convert_lst(envi->envlst);
 			return (1);
 		}
 		tmp = tmp->next;
