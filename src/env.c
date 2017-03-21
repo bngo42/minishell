@@ -6,23 +6,23 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 19:46:16 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 19:07:09 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 20:08:30 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void        add_env(t_env **lst, t_env *newlink)
+void		add_env(t_env **lst, t_env *newlink)
 {
-    t_env *tmp;
-    
-    tmp = *lst;
-    if (!(*lst))
-        *lst = newlink;
-    while ((*lst)->next)
-        *lst = (*lst)->next;
-    (*lst)->next = newlink;
-    *lst = tmp;
+	t_env *tmp;
+
+	tmp = *lst;
+	if (!(*lst))
+		*lst = newlink;
+	while ((*lst)->next)
+		*lst = (*lst)->next;
+	(*lst)->next = newlink;
+	*lst = tmp;
 }
 
 void		init_env(t_globenv *envi)
@@ -33,8 +33,7 @@ void		init_env(t_globenv *envi)
 	envi->cpath = getcwd(buff, 512);
 	if ((envi->envlst = (t_env*)malloc(sizeof(t_env))))
 	{
-		newenv("PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/
-				usr/local/munki", envi);
+		newenv("PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/munki", envi);
 		newenv("HOME=/Users/bngo", envi);
 		newenv("LOGNAME=bngo", envi);
 		newenv("SHLVL=1", envi);
@@ -62,7 +61,7 @@ t_env		*convert_env(char **env)
 	char	**tmp;
 	t_env	*lst;
 	t_env	*new;
-	
+
 	lst = NULL;
 	if (env)
 	{

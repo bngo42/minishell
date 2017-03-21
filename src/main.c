@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 19:04:26 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 20:12:41 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int			get_func(char **str, t_globenv *envi)
 
 int			read_cmd(t_globenv *envi)
 {
-	char *line;
+	char	*line;
 	int		ret;
 	char	**arg;
 
@@ -80,6 +80,22 @@ int			main(int argc, char **argv, char **envp)
 	return (0);
 }
 
+int			exit_func(char **str, t_globenv *envi)
+{
+	int i;
+	int e;
 
-
-
+	i = 0;
+	e = 0;
+	while (str[i])
+		i++;
+	if (i > 2)
+		ft_putendl("exit: too many arguments");
+	else
+	{
+		if (str[1])
+			e = atoi(str[1]);
+		exit((e < 256) ? e : 0);
+	}
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 19:11:22 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 12:23:56 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 20:10:00 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ char		*pathhome(char *path, t_globenv *envi)
 	return (newpath);
 }
 
-
 char		*filterpath(char *path)
 {
 	char	*res;
@@ -61,7 +60,7 @@ char		*filterpath(char *path)
 	res = (char*)malloc(sizeof(char) * ft_strlen(path));
 	while (i < len)
 	{
-			res[j++] = path[i++];
+		res[j++] = path[i++];
 	}
 	return (res);
 }
@@ -94,14 +93,12 @@ char		*redirect(char *path)
 		{
 			if (tmp[j])
 			{
-				tmp2 = trijoin(res,"/", tmp[j]);
+				tmp2 = trijoin(res, "/", tmp[j]);
 				res = ft_strdup(tmp2);
-				if (tmp2)
-					free(tmp2);
+				ft_strdel(&tmp2);
 			}
 		}
-		if (tmp[0])
-			freetab(tmp);
+		freetab(tmp);
 	}
 	return (res);
 }
@@ -126,7 +123,3 @@ void		setpath(char *path, char *old, t_globenv *envi)
 	if (old)
 		free(old);
 }
-
-
-
-

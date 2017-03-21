@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 19:30:48 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 13:54:46 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 20:05:48 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,15 @@
 
 char		**get_cmd_path(t_globenv *envi)
 {
-	char	**tmp;
 	char	**path;
-	int		i;
+	char	*tmp;
 
 	path = NULL;
-	i = 0;
-	while (envi->envtab[i])
+	if ((tmp = getlstvalue("PATH", envi)))
 	{
-		tmp = NULL;
-		if ((tmp = ft_strsplit(envi->envtab[i], '=')))
-		{
-			if (tmp[0] && ft_strcmp(tmp[0], "PATH") == 0)
-			{
-				path = ft_strsplit(tmp[1], ':');
-				freetab(tmp);
-				return (path);
-			}
-			freetab(tmp);
-		}
-		i++;
+		path = ft_strsplit(tmp, ':');
+		ft_strdel(&tmp);
+		return (path);
 	}
 	return (path);
 }
@@ -46,7 +35,6 @@ int			exe_cmd(char *path, char **arg, t_globenv *envi)
 	process = fork();
 	if (process == 0)
 	{
-		
 		env = convert_lst(envi->envlst);
 		if (execve(path, arg, env))
 		{
@@ -57,10 +45,9 @@ int			exe_cmd(char *path, char **arg, t_globenv *envi)
 			return (0);
 	}
 	else
-		wait (NULL);
+		wait(NULL);
 	return (0);
 }
-
 
 int			check_cmd(char *cmd, char **arg, t_globenv *envi)
 {
@@ -83,13 +70,10 @@ int			check_cmd(char *cmd, char **arg, t_globenv *envi)
 			newcmd = ft_strjoin(newpath, cmd);
 			if (access(newcmd, F_OK) == 0)
 				ret = exe_cmd(newcmd, arg, envi);
-			if (newcmd)
-				free(newcmd);
-			if (newpath)
-				free(newpath);
+			free(newcmd);
+			free(newpath);
 		}
-		if (path[0])
-			freetab(path);
+		freetab(path);
 	}
 	return (ret);
 }

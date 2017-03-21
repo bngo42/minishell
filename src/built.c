@@ -6,13 +6,13 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 15:23:31 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/21 20:12:45 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int		echo_func(char **str, t_globenv *envi)
+int			echo_func(char **str, t_globenv *envi)
 {
 	int		i;
 
@@ -101,7 +101,7 @@ int			unsetenv_func(char **str, t_globenv *envi)
 				ft_strdel(&del->name);
 				ft_strdel(&del->value);
 				free(del);
-				break;
+				break ;
 			}
 			else
 				tmp = tmp->next;
@@ -145,22 +145,3 @@ int			env_func(char **str, t_globenv *envi)
 	return (0);
 }
 
-int			exit_func(char **str, t_globenv *envi)
-{
-	int i;
-	int e;
-
-	i = 0;
-	e = 0;
-	while (str[i])
-		i++;
-	if (i > 2)
-		ft_putendl("exit: too many arguments");
-	else
-	{
-		if (str[1])
-			e = atoi(str[1]);
-		exit( (e < 256) ? e : 0);
-	}
-	return (0);
-}
