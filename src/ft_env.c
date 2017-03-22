@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:14:21 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/22 16:05:42 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/22 19:17:53 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,17 @@ int			newenv(char *str, t_globenv *envi)
 	newlink = NULL;
 	if (!(tmp = ft_strsplit(str, '=')))
 		return (-1);
-	if (!(newlink = (t_env*)ft_memalloc(sizeof(t_env))))
-		return (-1);
-	if (tmp[0])
+	if (!(update_var(tmp[0], tmp[1], envi)))
 	{
-		newlink->name = ft_strdup(tmp[0]);
-		newlink->value = (tmp[1]) ? ft_strdup(tmp[1]) : ft_strnew(0);
-		newlink->next = NULL;
-		add_env(&envi->envlst, newlink);
+		if (!(newlink = (t_env*)ft_memalloc(sizeof(t_env))))
+			return (-1);
+		if (tmp[0])
+		{
+			newlink->name = ft_strdup(tmp[0]);
+			newlink->value = (tmp[1]) ? ft_strdup(tmp[1]) : ft_strnew(0);
+			newlink->next = NULL;
+			add_env(&envi->envlst, newlink);
+		}
 	}
 	freetab(tmp);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 19:30:48 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/22 17:08:05 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/22 19:31:11 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ char		**get_cmd_path(t_globenv *envi)
 	char	*tmp;
 
 	path = NULL;
+	tmp = NULL;
 	if ((tmp = getlstvalue("PATH", envi)))
 	{
+		ft_putendl("TOTO");
 		path = ft_strsplit(tmp, ':');
 		ft_strdel(&tmp);
 		return (path);
@@ -59,21 +61,24 @@ int			check_cmd(char *cmd, char **arg, t_globenv *envi)
 
 	i = -1;
 	ret = 1;
+	path = NULL;
 	if (access(cmd, F_OK) == 0)
 		ret = exe_cmd(cmd, arg, envi);
 	else
 	{
-		path = get_cmd_path(envi);
-		while (path[++i] && ret)
+		if ((path = get_cmd_path(envi)))
 		{
-			newpath = ft_strjoin(path[i], "/");
-			newcmd = ft_strjoin(newpath, cmd);
-			if (access(newcmd, F_OK) == 0)
-				ret = exe_cmd(newcmd, arg, envi);
-			free(newcmd);
-			free(newpath);
+			while (path[++i] && ret)
+			{
+				newpath = ft_strjoin(path[i], "/");
+					newcmd = ft_strjoin(newpath, cmd);
+				if (access(newcmd, F_OK) == 0)
+					ret = exe_cmd(newcmd, arg, envi);
+				free(newcmd);
+				free(newpath);
+			}
+			freetab(path);
 		}
-		freetab(path);
 	}
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 14:29:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/22 16:53:39 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/22 19:29:24 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char		**convert_lst(t_env *lst)
 	return (tmp);
 }
 
-int			update_vartab(char *name, char *value, t_globenv *envi)
+int			update_var(char *name, char *value, t_globenv *envi)
 {
 	t_env	*tmp;
 

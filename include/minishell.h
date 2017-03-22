@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:30:19 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/22 17:03:10 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/22 19:14:46 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int					read_cmd(t_globenv *envi);
 char				*getlstvalue(char *name, t_globenv *env);
 char				*gettabvalue(char *name, t_globenv *env);
 char				**convert_lst(t_env *lst);
-int					update_vartab(char*name, char *value, t_globenv *envi);
+int					update_var(char*name, char *value, t_globenv *envi);
 char				*trijoin(char *s1, char *s2, char *s3);
 
 /*

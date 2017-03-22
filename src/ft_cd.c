@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 19:11:22 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 20:10:00 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/22 19:15:10 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ void		setpath(char *path, char *old, t_globenv *envi)
 	{
 		if (chdir(path) == 0)
 		{
-			update_vartab("OLDPWD", old, envi);
-			update_vartab("PWD", getcwd(buff, 512), envi);
+			update_var("OLDPWD", old, envi);
+			update_var("PWD", getcwd(buff, 512), envi);
 		}
 	}
 	if (buff)
