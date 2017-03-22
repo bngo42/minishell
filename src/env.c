@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 19:46:16 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 20:08:30 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/22 12:56:59 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,18 @@ void		add_env(t_env **lst, t_env *newlink)
 	t_env *tmp;
 
 	tmp = *lst;
-	if (!(*lst))
-		*lst = newlink;
-	while ((*lst)->next)
-		*lst = (*lst)->next;
-	(*lst)->next = newlink;
-	*lst = tmp;
+	printf("ADDING [%s]\n", newlink->name);
+	if (tmp && newlink)
+	{
+		if (!tmp)
+			tmp = newlink;
+		while (tmp->next)
+		{
+			printf("LINK [%s]\n", tmp->name);
+			tmp = tmp->next;
+		}
+		tmp->next = newlink;
+	}
 }
 
 void		init_env(t_globenv *envi)

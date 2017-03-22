@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:14:21 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 15:24:56 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/22 12:58:02 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,19 @@ int			newenv(char *str, t_globenv *envi)
 	t_env	*newlink;
 
 	tmp = NULL;
+	newlink = NULL;
 	if (!(tmp = ft_strsplit(str, '=')))
 		return (-1);
+	ft_putendl("VALUE SPLITTED");
 	if (!(newlink = (t_env*)malloc(sizeof(t_env))))
 		return (-1);
+	ft_putendl("NEWLINK ALLOCATED");
 	newlink->name = ft_strdup(tmp[0]);
 	newlink->value = (tmp[1]) ? ft_strdup(tmp[1]) : ft_strnew(0);
+	newlink->next = NULL;
+	ft_putendl("VALUE COPIED");
 	add_env(&envi->envlst, newlink);
+	ft_putendl("NEW LINK ADDED");
 	freetab(tmp);
 	return (0);
 }
