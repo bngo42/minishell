@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:14:21 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/22 12:58:02 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/22 16:05:42 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			update_envtab(t_globenv *envi)
 	int		i;
 
 	i = 0;
-	if (!(res = (char**)malloc(sizeof(char*) * listlength(envi->envlst))))
+	if (!(res = (char**)ft_memalloc(sizeof(char*) * listlength(envi->envlst))))
 		return (-1);
 	tmp = envi->envlst;
 	while (tmp)
@@ -43,16 +43,15 @@ int			newenv(char *str, t_globenv *envi)
 	newlink = NULL;
 	if (!(tmp = ft_strsplit(str, '=')))
 		return (-1);
-	ft_putendl("VALUE SPLITTED");
-	if (!(newlink = (t_env*)malloc(sizeof(t_env))))
+	if (!(newlink = (t_env*)ft_memalloc(sizeof(t_env))))
 		return (-1);
-	ft_putendl("NEWLINK ALLOCATED");
-	newlink->name = ft_strdup(tmp[0]);
-	newlink->value = (tmp[1]) ? ft_strdup(tmp[1]) : ft_strnew(0);
-	newlink->next = NULL;
-	ft_putendl("VALUE COPIED");
-	add_env(&envi->envlst, newlink);
-	ft_putendl("NEW LINK ADDED");
+	if (tmp[0])
+	{
+		newlink->name = ft_strdup(tmp[0]);
+		newlink->value = (tmp[1]) ? ft_strdup(tmp[1]) : ft_strnew(0);
+		newlink->next = NULL;
+		add_env(&envi->envlst, newlink);
+	}
 	freetab(tmp);
 	return (0);
 }

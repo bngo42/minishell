@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 20:12:41 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/22 16:39:39 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,17 @@ int			main(int argc, char **argv, char **envp)
 	char		*line;
 	t_globenv	*envi;
 
-	envi = (t_globenv*)malloc(sizeof(t_globenv));
+	envi = (t_globenv*)ft_memalloc(sizeof(t_globenv));
 	if (!envp[0])
 		init_env(envi);
 	else
+	{
 		envi->envlst = convert_env(envp);
+		changelvl(envi, 1);
+	}
 	while (1)
 	{
-		ft_putstr("[BOBI-MISHELL] ");
+		ft_putstr("[MISHELL] ");
 		if (read_cmd(envi) == -1)
 			return (-1);
 	}

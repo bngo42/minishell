@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:43:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 20:10:41 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/22 16:08:47 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int			listlength(t_env *lst)
 
 	i = 0;
 	tmp = lst;
+	if (!tmp->next)
+		return (1);
 	while (tmp)
 	{
 		i++;
@@ -70,10 +72,34 @@ void		putlst(t_env *lst)
 	tmp = lst;
 	while (tmp)
 	{
-		ft_putstr(tmp->name);
-		ft_putchar('=');
-		ft_putstr(tmp->value);
-		ft_putchar('\n');
+		if (tmp->name)
+		{
+			ft_putstr(tmp->name);
+			ft_putchar('=');
+			ft_putstr(tmp->value);
+			ft_putchar('\n');
+		}
 		tmp = tmp->next;
 	}
 }
+
+void		changelvl(t_globenv *envi, int nb)
+{
+	char	*tmp;
+	int		value;
+
+	if ((tmp = getlstvalue("SHLVL", envi)) == NULL)
+	{
+		tmp = ft_strdup("0");
+		newenv("SHLVL=1", envi);
+	}
+	value = ft_atoi(tmp);
+	value += nb;
+	ft_strdel(&tmp);
+	tmp = ft_itoa(value);
+	update_vartab("SHLVL", tmp, envi);
+}
+
+
+
+

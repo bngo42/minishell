@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/22 12:42:25 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/22 17:17:56 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,7 @@ int			setenv_func(char **str, t_globenv *envi)
 			if (str[i][j] == '=')
 			{
 				if (str[i][j - 1] != '=' && j > 0)
-				{
-					ft_putendl("'=' FOUNDED");
 					newenv(str[i], envi);
-				}
 				else
 				{
 					ft_putstr("BOBI-MISHELL: ");
@@ -120,31 +117,23 @@ int			env_func(char **str, t_globenv *envi)
 
 	i = 0;
 	while (str[++i])
-	{
 		if (check_cmd(str[i], &str[i], envi) == 0)
 			return (0);
-	}
 	i = 0;
-	putlst(envi->envlst);
 	while (str[++i])
 	{
-		j = -1;
-		while (str[i][++j])
+		if (ft_strchr(str[i], '='))
 		{
-			if (str[i][j] == '=')
-			{
-				if (str[i][j - 1] != '=' && j > 0)
-					ft_putendl(str[i]);
-				else
-				{
-					ft_putstr("BOBI-MISHELL: ");
-					ft_putstr(str[i]);
-					ft_putendl(" not found");
-					return (0);
-				}
-			}
+			j = -1;
+			while (str[i][++j])
+				if (str[i][j] == '=')
+					if (!(str[i][j - 1] != '=' && j > 0))
+						return (1);
 		}
+		else
+			return (1);
 	}
+	putlst(envi->envlst);
+	ft_puttab(&str[1]);
 	return (0);
 }
-

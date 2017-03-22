@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 14:29:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 18:48:09 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/22 16:53:39 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,15 @@ char		*getlstvalue(char *name, t_globenv *envi)
 
 	res = NULL;
 	tmp = envi->envlst;
-	while (tmp && ft_strcmp(name, tmp->name) != 0)
+	while (tmp)
+	{
+		if (ft_strcmp(name, tmp->name) == 0)
+		{
+			res = ft_strdup(tmp->value);
+			return (res);
+		}
 		tmp = tmp->next;
-	if (tmp->value)
-		res = ft_strdup(tmp->value);
+	}
 	return (res);
 }
 

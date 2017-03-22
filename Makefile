@@ -6,13 +6,13 @@
 #    By: bngo <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/05 11:40:59 by bngo              #+#    #+#              #
-#    Updated: 2017/03/16 13:15:14 by bngo             ###   ########.fr        #
+#    Updated: 2017/03/22 16:10:04 by bngo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = clang
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -fsanitize=address -g -Wall -Werror -Wextra
 CPATH = src/
 OPATH = obj/
 HPATH = include/ libft/
