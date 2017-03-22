@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 19:11:22 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/22 19:15:10 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/22 20:10:53 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char		*filterpath(char *path)
 	len = ft_strlen(path);
 	if (path[len] == '/')
 		len--;
-	res = (char*)malloc(sizeof(char) * ft_strlen(path));
+	res = (char*)ft_memalloc(sizeof(char) * ft_strlen(path));
 	while (i < len)
 	{
 		res[j++] = path[i++];
@@ -106,20 +106,23 @@ char		*redirect(char *path)
 void		setpath(char *path, char *old, t_globenv *envi)
 {
 	char	*buff;
+	char	*tmp;
 
 	buff = NULL;
 	if (check_dir(path))
 	{
 		if (chdir(path) == 0)
 		{
+			tmp = getcwd(buff, 512);
 			update_var("OLDPWD", old, envi);
-			update_var("PWD", getcwd(buff, 512), envi);
+			update_var("PWD", tmp, envi);
+			ft_strdel(&tmp);
 		}
 	}
 	if (buff)
 		free(buff);
 	if (path)
-		free(path);
+		ft_strdel(&path);
 	if (old)
-		free(old);
+		ft_strdel(&old);
 }

@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 14:29:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/22 19:29:24 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/22 20:00:30 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char		**convert_lst(t_env *lst)
 		temp = temp->next;
 		i++;
 	}
-	if (!(tmp = (char**)malloc(sizeof(char*) * i + 1)))
+	if (!(tmp = (char**)ft_memalloc(sizeof(char*) * i + 1)))
 		return (NULL);
 	temp = lst;
 	i = 0;
@@ -108,7 +108,6 @@ char		**convert_lst(t_env *lst)
 		tmp[i++] = trijoin(temp->name, "=", temp->value);
 		temp = temp->next;
 	}
-	tmp[i] = 0;
 	return (tmp);
 }
 

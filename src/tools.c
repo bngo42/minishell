@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:43:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/22 19:14:57 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/22 19:47:20 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,5 @@ void		changelvl(t_globenv *envi, int nb)
 	ft_strdel(&tmp);
 	tmp = ft_itoa(value);
 	update_var("SHLVL", tmp, envi);
+	ft_strdel(&tmp);
 }
