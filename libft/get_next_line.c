@@ -6,18 +6,18 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/20 14:07:30 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/21 18:46:53 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/22 17:24:14 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/get_next_line.h"
 
-int     read_text(int const fd, char **str)
+int			read_text(int const fd, char **str)
 {
-	char    buf[BUFF_SIZE + 1];
-	int     nb_read;
-	char    *point;
-	
+	char	buf[BUFF_SIZE + 1];
+	int		nb_read;
+	char	*point;
+
 	while ((nb_read = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[nb_read] = '\0';
@@ -32,12 +32,12 @@ int     read_text(int const fd, char **str)
 	return (nb_read);
 }
 
-char    *get_line(char **str)
+char		*get_line(char **str)
 {
-	char    *buf;
-	char    *end_line;
-	char    *point;
-	
+	char	*buf;
+	char	*end_line;
+	char	*point;
+
 	end_line = ft_strchr(*str, '\n');
 	point = NULL;
 	if (end_line != NULL)
@@ -56,11 +56,11 @@ char    *get_line(char **str)
 	return (buf);
 }
 
-int     get_next_line(int const fd, char **line)
+int			get_next_line(int const fd, char **line)
 {
-	static char     *str[256];
-	int             nb_read;
-	
+	static char		*str[256];
+	int				nb_read;
+
 	if (fd > 255 || BUFF_SIZE <= 0 || !line || fd < 0)
 		return (-1);
 	nb_read = 0;
