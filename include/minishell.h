@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:30:19 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/23 15:36:22 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/23 15:39:56 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int					cd_func(char **str, t_globenv *envi);
 int					setenv_func(char **str, t_globenv *envi);
 int					unsetenv_func(char **str, t_globenv *envi);
 int					env_func(char **str, t_globenv *envi);
-int					exit_func(char **str, t_globenv *envi);
 
 /*
 **ENV.C
@@ -80,6 +79,7 @@ void				changelvl(t_globenv *envi, int nb);
 */
 int					get_func(char **str, t_globenv *envi);
 int					read_cmd(t_globenv *envi);
+int					exit_func(char **str, t_globenv *envi);
 
 /*
 **TOOLS2.C
