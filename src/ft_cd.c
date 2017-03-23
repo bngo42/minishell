@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 19:11:22 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/22 20:10:53 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/23 15:33:28 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,44 +61,6 @@ char		*filterpath(char *path)
 	while (i < len)
 	{
 		res[j++] = path[i++];
-	}
-	return (res);
-}
-
-char		*redirect(char *path)
-{
-	char	**tmp;
-	char	*res;
-	char	*tmp2;
-	int		i;
-	int		j;
-
-	i = -1;
-	res = NULL;
-	if ((tmp = ft_strsplit(path, '/')))
-	{
-		while (tmp[++i])
-		{
-			if (ft_strcmp(tmp[i], "..") == 0)
-			{
-				j = i;
-				while (j > 0 && tmp[j] == 0)
-					j--;
-				tmp[i] = 0;
-				tmp[j] = 0;
-			}
-		}
-		j = -1;
-		while (++j < i)
-		{
-			if (tmp[j])
-			{
-				tmp2 = trijoin(res, "/", tmp[j]);
-				res = ft_strdup(tmp2);
-				ft_strdel(&tmp2);
-			}
-		}
-		freetab(tmp);
 	}
 	return (res);
 }

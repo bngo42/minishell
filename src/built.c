@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/23 14:35:32 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/23 15:27:29 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ int			echo_func(char **str, t_globenv *envi)
 	int		i;
 
 	i = 0;
-	while (str[i])
+	while (str[++i])
 	{
 		ft_putstr(str[i]);
 		if (str[i + 1])
 			ft_putchar(' ');
-		i++;
 	}
 	ft_putchar('\n');
 	return (0);
@@ -139,10 +138,10 @@ int			env_func(char **str, t_globenv *envi)
 			while (str[i][++j])
 				if (str[i][j] == '=')
 					if (!(str[i][j - 1] != '=' && j > 0))
-						return (1);
+						return (0);
 		}
 		else
-			return (1);
+			return (0);
 	}
 	putlst(envi->envlst);
 	ft_puttab(&str[1]);
