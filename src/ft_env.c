@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:14:21 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/22 19:17:53 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/23 13:19:08 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int			newenv(char *str, t_globenv *envi)
 			newlink->name = ft_strdup(tmp[0]);
 			newlink->value = (tmp[1]) ? ft_strdup(tmp[1]) : ft_strnew(0);
 			newlink->next = NULL;
+			newlink->prev = NULL;
 			add_env(&envi->envlst, newlink);
 		}
 	}

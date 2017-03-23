@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/22 20:12:20 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/23 14:35:32 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,25 +82,36 @@ int			setenv_func(char **str, t_globenv *envi)
 	return (0);
 }
 
+int			rmlink(t_env **link)
+{
+	if ((*link)->prev)
+		(*link)->prev->next = (*link)->next;
+	if ((*link)->next)
+		(*link)->next->prev = (*link)->prev;
+	ft_strdel(&(*link)->name);
+	if ((*link)->value)
+		ft_strdel(&(*link)->value);
+	free(*link);
+	link = NULL;
+	return (0);
+}
+
 int			unsetenv_func(char **str, t_globenv *envi)
 {
 	t_env	*tmp;
-	t_env	*del;
 	int		i;
 
 	i = 0;
 	while (str[++i])
 	{
 		tmp = envi->envlst;
-		while (tmp->next)
+		while (tmp)
 		{
-			if (ft_strcmp(str[i], tmp->next->name) == 0)
+			if (ft_strcmp(str[i], tmp->name) == 0)
 			{
-				del = tmp->next;
-				tmp->next = del->next;
-				ft_strdel(&del->name);
-				ft_strdel(&del->value);
-				free(del);
+				if (!tmp->prev)
+					envi->envlst = envi->envlst->next;
+				rmlink(&tmp);
 				break ;
 			}
 			else

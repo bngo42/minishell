@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 19:46:16 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/22 16:39:03 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/23 13:23:18 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void		add_env(t_env **lst, t_env *newlink)
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = newlink;
+		newlink->prev = tmp;
 	}
 }
 
@@ -36,7 +37,8 @@ void		init_env(t_globenv *envi)
 	envi->cpath = getcwd(buff, 512);
 	if ((envi->envlst = (t_env*)ft_memalloc(sizeof(t_env))))
 	{
-		newenv("PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/munki", envi);
+		envi->envlst->name = ft_strdup("PATH");
+		envi->envlst->value = ft_strdup("/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/munki");
 		newenv("HOME=/Users/bngo", envi);
 		newenv("LOGNAME=bngo", envi);
 		newenv("SHLVL=1", envi);
@@ -55,6 +57,7 @@ t_env		*init_link(char *name, char *value)
 	new->name = ft_strdup(name);
 	new->value = ft_strdup(value);
 	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
 
