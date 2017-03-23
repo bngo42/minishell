@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:30:19 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/23 13:04:31 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/23 15:36:22 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void				add_env(t_env **lst, t_env *newlink);
 void				init_env(t_globenv *envi);
 t_env				*init_link(char *name, char *value);
 t_env				*convert_env(char **env);
+int					rmlink(t_env **link);
 
 /*
 **EXEC.C

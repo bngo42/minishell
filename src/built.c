@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/23 15:27:29 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/23 15:35:45 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,6 @@ int			setenv_func(char **str, t_globenv *envi)
 			}
 		}
 	}
-	return (0);
-}
-
-int			rmlink(t_env **link)
-{
-	if ((*link)->prev)
-		(*link)->prev->next = (*link)->next;
-	if ((*link)->next)
-		(*link)->next->prev = (*link)->prev;
-	ft_strdel(&(*link)->name);
-	if ((*link)->value)
-		ft_strdel(&(*link)->value);
-	free(*link);
-	link = NULL;
 	return (0);
 }
 
