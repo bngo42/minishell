@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 19:46:16 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/23 13:23:18 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/23 15:01:28 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		add_env(t_env **lst, t_env *newlink)
 	t_env *tmp;
 
 	tmp = NULL;
-	if (!(*lst)->name)
+	if (!(*lst))
 		*lst = newlink;
 	else
 	{
