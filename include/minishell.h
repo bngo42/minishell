@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:30:19 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/23 15:39:56 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/24 12:15:12 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,5 @@ void				setpath(char *path, char *old, t_globenv *envi);
 int					update_envtab(t_globenv *envi);
 int					newenv(char *str, t_globenv *envi);
 int					delenv(t_env **lst);
+int					freelist(t_env **lst);
 #endif

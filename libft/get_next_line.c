@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/20 14:07:30 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/22 17:24:14 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/24 17:42:08 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char		*get_line(char **str)
 	char	*buf;
 	char	*end_line;
 	char	*point;
+	char	*tmp;;
 
 	end_line = ft_strchr(*str, '\n');
 	point = NULL;
@@ -44,7 +45,9 @@ char		*get_line(char **str)
 	{
 		*end_line = '\0';
 		point = end_line;
-		end_line = ft_strdup(end_line + 1);
+		tmp = ft_strdup(end_line + 1);
+		end_line = ft_strdup(tmp);
+		ft_strdel(&tmp);
 	}
 	buf = ft_strdup(*str);
 	point != NULL ? *point = '\n' : 0;

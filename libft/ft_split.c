@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 14:02:26 by bngo              #+#    #+#             */
-/*   Updated: 2017/02/06 14:49:17 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/24 12:04:10 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char		**ft_split(char *str)
 
 	i = 0;
 	j = 0;
-	if (!(split = (char **)malloc(sizeof(char *) * (count_words(str) + 1))))
+	if (!(split = (char **)ft_memalloc(sizeof(char *) * (count_words(str) + 1))))
 		return (split);
 	while (str && str[i])
 	{

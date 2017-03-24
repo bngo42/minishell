@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/23 15:39:53 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/24 12:17:49 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,10 @@ int			main(int argc, char **argv, char **envp)
 	{
 		ft_putstr("[MISHELL] ");
 		if (read_cmd(envi) == -1)
-			return (-1);
+			break ;
 	}
+	freelist(&envi->envlst);
+	free(envi);
 	return (0);
 }
 
@@ -96,6 +98,8 @@ int			exit_func(char **str, t_globenv *envi)
 		ft_putendl("exit: too many arguments");
 	else
 	{
+		freelist(&envi->envlst);
+		free(envi);
 		if (str[1])
 			e = atoi(str[1]);
 		exit((e < 256) ? e : 0);
