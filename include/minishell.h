@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:30:19 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/24 12:15:12 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/25 14:50:17 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char				*gettabvalue(char *name, t_globenv *env);
 char				**convert_lst(t_env *lst);
 int					update_var(char*name, char *value, t_globenv *envi);
 char				*trijoin(char *s1, char *s2, char *s3);
-
+int					tristr(char *s1, char *s2, char *s3);
 /*
 **FT_CD.C
 */

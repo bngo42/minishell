@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/25 13:34:41 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/25 15:13:28 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,11 @@ int			setenv_func(char **str, t_globenv *envi)
 				if (j > 0 && str[i][j - 1] && str[i][j - 1] != '=')
 					newenv(str[i], envi);
 				else
-				{
-					ft_putstr("MISHELL: ");
-					ft_putstr(str[i]);
-					ft_putendl(" not found");
-					return (0);
-				}
+					return (tristr("MISHELL: ", str[i], " not found"));
 			}
+			else
+					return (tristr("MISHELL: ", str[i], " not found"));
+
 		}
 	}
 	return (0);
@@ -124,10 +122,10 @@ int			env_func(char **str, t_globenv *envi)
 			while (str[i][++j])
 				if (str[i][j] == '=')
 					if (!(j > 0 && str[i][j - 1] != '='))
-						return (0);
+						return (tristr("MISHELL: ", str[i], " not found"));
 		}
 		else
-			return (0);
+			return (tristr("MISHELL: ", str[i], " not found"));
 	}
 	putlst(envi->envlst);
 	ft_puttab(&str[1]);

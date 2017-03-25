@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 14:29:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/25 12:19:31 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/25 14:39:40 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,33 +58,6 @@ char		*getlstvalue(char *name, t_globenv *envi)
 	return (res);
 }
 
-char		*gettabvalue(char *name, t_globenv *envi)
-{
-	char	*res;
-	char	**tmp;
-	int		i;
-
-	res = NULL;
-	i = 0;
-	while (envi->envtab[i])
-	{
-		tmp = ft_strsplit(envi->envtab[i], '=');
-		if (ft_strcmp(name, tmp[0]) == 0)
-		{
-			if (tmp[1])
-				res = ft_strdup(tmp[1]);
-		}
-		ft_strdel(&tmp[0]);
-		ft_strdel(&tmp[1]);
-		if (res)
-			return (res);
-		i++;
-	}
-	if (tmp)
-		freetab(tmp);
-	return (res);
-}
-
 char		**convert_lst(t_env *lst)
 {
 	char	**tmp;
@@ -120,5 +93,14 @@ int			update_var(char *name, char *value, t_globenv *envi)
 		}
 		tmp = tmp->next;
 	}
+	return (0);
+}
+
+int		tristr(char *s1, char *s2, char *s3)
+{
+	ft_putstr(s1);
+	ft_putstr(s2);
+	ft_putstr(s3);
+	ft_putchar('\n');
 	return (0);
 }

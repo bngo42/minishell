@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:14:21 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/24 12:14:10 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/25 15:12:22 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			newenv(char *str, t_globenv *envi)
 
 	tmp = NULL;
 	newlink = NULL;
-	if (!(tmp = ft_strsplit(str, '=')))
+	if (ft_strchr(str, '=') && !(tmp = ft_strsplit(str, '=')))
 		return (-1);
 	if (!(update_var(tmp[0], tmp[1], envi)))
 	{
