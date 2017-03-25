@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 12:28:11 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/24 12:17:49 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/25 13:21:58 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int			read_cmd(t_globenv *envi)
 	if (line && line[0] != '\0')
 	{
 		arg = ft_split(line);
-		ft_strdel(&line);
 		if (arg[0] && get_func(arg, envi))
 		{
 			ft_putstr_fd("command not found: ", 2);
@@ -58,6 +57,7 @@ int			read_cmd(t_globenv *envi)
 		}
 		freetab(arg);
 	}
+	ft_strdel(&line);
 	return (0);
 }
 
