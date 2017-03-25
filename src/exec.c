@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 19:30:48 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/24 17:39:22 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/25 13:40:42 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ int			exe_cmd(char *path, char **arg, t_globenv *envi)
 	if (process == 0)
 	{
 		env = convert_lst(envi->envlst);
-		execve(path, arg, env);
+		if (execve(path, arg, env))
+			return (1);
+		else
+			return (0);
 	}
 	else
 		wait(NULL);
