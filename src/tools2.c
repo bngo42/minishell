@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 14:29:45 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/25 14:39:40 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/25 15:28:13 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int			update_var(char *name, char *value, t_globenv *envi)
 	return (0);
 }
 
-int		tristr(char *s1, char *s2, char *s3)
+int			tristr(char *s1, char *s2, char *s3)
 {
 	ft_putstr(s1);
 	ft_putstr(s2);

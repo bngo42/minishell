@@ -6,7 +6,7 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:37:36 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/25 15:13:28 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/25 15:27:38 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ int			setenv_func(char **str, t_globenv *envi)
 					return (tristr("MISHELL: ", str[i], " not found"));
 			}
 			else
-					return (tristr("MISHELL: ", str[i], " not found"));
-
+				return (tristr("MISHELL: ", str[i], " not found"));
 		}
 	}
 	return (0);

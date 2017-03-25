@@ -6,14 +6,14 @@
 /*   By: bngo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/02 14:02:26 by bngo              #+#    #+#             */
-/*   Updated: 2017/03/24 12:04:10 by bngo             ###   ########.fr       */
+/*   Updated: 2017/03/25 15:28:44 by bngo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <unistd.h>
 
-static int	count_words(char *str)
+static int	count(char *str)
 {
 	int	i;
 	int	count;
@@ -42,7 +42,7 @@ char		**ft_split(char *str)
 
 	i = 0;
 	j = 0;
-	if (!(split = (char **)ft_memalloc(sizeof(char *) * (count_words(str) + 1))))
+	if (!(split = (char **)ft_memalloc(sizeof(char *) * (count(str) + 1))))
 		return (split);
 	while (str && str[i])
 	{
